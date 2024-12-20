@@ -75,7 +75,8 @@ export const SmartBremenMap = () => {
       zoom={14}
       style={{ height: "100%", width: "100%" }}
     >
-      <TileLayer url="http://localhost:8080/styles/OSM OpenMapTiles/512/{z}/{x}/{y}.png" />
+      {/* <TileLayer url="http://localhost:8080/styles/OSM OpenMapTiles/512/{z}/{x}/{y}.png" /> */}
+      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       {/* http://localhost:8080/styles/512/Smartcity.json */}
       {/* <TileLayer url="http://localhost:8080/styles/smartcity/512/{z}/{x}/{y}.png" /> */}
       {/* <VectorTileLayer /> */}
