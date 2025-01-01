@@ -1,0 +1,51 @@
+@import '../styles/colors.css';
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px 20px;
+    background-color: var(--background);
+    position: relative;
+  }
+  
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    right: 20px;
+    height: 0.3px;
+    background-color: var(--on-primary);
+  }
+  
+  .header-section {
+    display: flex;
+    text-align: center;
+  }
+  
+  .header-section.icon {
+    justify-content: flex-start;
+  }
+
+  .header-section.logo {
+    justify-content: center;
+    flex: 1;
+  }
+  
+  .header-section.nav {
+    justify-content: flex-end;
+  }
+
+  .header-section img{
+    max-height: 30px;
+  }
+
+  .header-section.icon img{
+    max-height: 30px;
+  }
+
+  .header-section.nav img{
+    max-height: 10px;
+  }
