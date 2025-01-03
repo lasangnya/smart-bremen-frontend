@@ -3,18 +3,26 @@
   position: relative;
   padding: 20px;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
 }
 
-
-.footer-skyline {
+.footer-skyline-container {
+  width: 100%;
+  overflow: hidden;
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 100%;
-  height: auto;
-  z-index: 0;
+}
+
+.footer-skyline-wrapper {
+  display: flex;
+  width: 300%;
+}
+
+.footer-skyline {
+  height: 150px;
+  flex-shrink: 0;
 }
 
 .footer-content {

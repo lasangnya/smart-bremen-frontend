@@ -7,7 +7,9 @@
     width: 100%;
     padding: 10px 20px;
     background-color: var(--background);
-    position: relative;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
   }
   
   .header::after {
@@ -27,6 +29,7 @@
   
   .header-section.icon {
     justify-content: flex-start;
+    height: 25px;
   }
 
   .header-section.logo {
@@ -36,16 +39,37 @@
   
   .header-section.nav {
     justify-content: flex-end;
+    height: 8px;
+    cursor: pointer;
   }
 
   .header-section img{
     max-height: 30px;
   }
 
-  .header-section.icon img{
-    max-height: 30px;
+  .nav-popup {
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
   }
-
-  .header-section.nav img{
-    max-height: 10px;
+  
+  .nav-popup ul {
+    list-style: none;
+    margin: 0;
+    padding: 10px;
+  }
+  
+  .nav-popup li {
+    margin: 10px 0;
+  }
+  
+  .nav-popup a {
+    text-decoration: none;
+    color: var(--primary-color);
+    font-family: 'CircularStd', sans-serif;
   }

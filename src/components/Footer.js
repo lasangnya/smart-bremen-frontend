@@ -7,7 +7,13 @@ import bremen_skyline from '../assets/images/bremen-skyline.svg';
 const Footer = () => {
     return(
         <footer className='footer'>
-            <img src={bremen_skyline} alt='Bremen Skyline' className='footer-skyline' />
+            <div className='footer-skyline-container'>
+                <div className='footer-skyline-wrapper'>
+                    <img src={bremen_skyline} alt='Bremen Skyline' className='footer-skyline' />
+                    <img src={bremen_skyline} alt='Bremen Skyline' className='footer-skyline' />
+                    <img src={bremen_skyline} alt='Bremen Skyline' className='footer-skyline' />
+                </div>
+            </div>
             <div className='footer-content'>
                 <div className='footer-logos'>
                     <img src={logo} alt='Smart Bremen Logo' className='footer-logo' />
