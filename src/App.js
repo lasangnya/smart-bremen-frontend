@@ -7,6 +7,8 @@ import ContactUs from './pages/ContactUs';
 import SmartBremenLines from './assets/icons/smart_bremen_lines.svg'
 import './styles/colors.css';
 import './App.css';
+import routes from "./routes";
+import AboutUs from './pages/AboutUs';
 
 const App = () => {
 
@@ -43,10 +45,13 @@ const AppWrapper = () => {
   return (
     <Routes>
       {/* Default route */}
-      <Route path="/" element={<App />} />
+      <Route path={routes.home} element={<App />} />
       
       {/* Contact Us route */}
-      <Route path="/contactus" element={<ContactUs />} />
+      <Route path={routes.contactUs} element={<ContactUs />} />
+
+      {/* About Us route */}
+      <Route path={routes.aboutUs} element={<AboutUs />} />
     </Routes>
   );
 };
