@@ -1,12 +1,21 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Button from './components/Button';
+import ContactUs from './pages/ContactUs';
 import SmartBremenLines from './assets/icons/smart_bremen_lines.svg'
 import './styles/colors.css';
 import './App.css';
 
 const App = () => {
+
+  const navigate = useNavigate();
+
+  const handleContactUsClick = () => {
+    navigate('/contactus');
+  }
+
   return (
     <div className='app-container'>
       <Header />
@@ -23,11 +32,24 @@ const App = () => {
         Like to get featured?
       </div>
       <div className='button-container'>
-        <Button text="CONTACT US" onClick={() => {}} />
+        <Button text="CONTACT US" onClick={handleContactUsClick} />
       </div>
       <Footer />
     </div>
   );
 };
 
-export default App;
+const AppWrapper = () => {
+  return (
+    <Routes>
+      {/* Default route */}
+      <Route path="/" element={<App />} />
+      
+      {/* Contact Us route */}
+      <Route path="/contactus" element={<ContactUs />} />
+    </Routes>
+  );
+};
+
+
+export default AppWrapper;
