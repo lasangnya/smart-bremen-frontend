@@ -21,8 +21,8 @@ const App = () => {
   return (
     <div className='app-container'>
       <Header />
-      <div className='text-container'>
-        <div className='text-content'>
+      <div className='app-content'>
+        <div className='text-we-are-bremen'>
           <span className='text-we-are'>WE ARE</span>
           <span className='text-with-icon'>
             <span className='text-bremen'>BREMEN</span>

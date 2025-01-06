@@ -1,0 +1,36 @@
+{
+    "headline" : "ABOUT US",
+    "description" : "About us description About us description About us description About us description About us description About us description About us description About us description About us description About us description About us description About us description About us description About us description About us description About us description About us description About us description About us description About us description",
+    "team" : [
+        {
+            "name" : "John Doe",
+            "position" : "CEO",
+            "image" : "https://via.placeholder.com/150"        
+        },
+        {
+            "name" : "Jane Doe",
+            "position" : "CTO",
+            "image" : "https://via.placeholder.com/150" 
+        },
+        {
+            "name" : "John Smith",
+            "position" : "CFO",
+            "image" : "https://via.placeholder.com/150"        
+        },
+        {
+            "name" : "John Doe",
+            "position" : "CEO",
+            "image" : "https://via.placeholder.com/150"        
+        },
+        {
+            "name" : "Jane Doe",
+            "position" : "CTO",
+            "image" : "https://via.placeholder.com/150" 
+        },
+        {
+            "name" : "John Smith",
+            "position" : "CFO",
+            "image" : "https://via.placeholder.com/150"        
+        }
+    ]
+}
