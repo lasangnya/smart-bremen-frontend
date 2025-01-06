@@ -2,7 +2,7 @@
   padding-top:60px ;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 300vh;
 }
 
 .button-container{
@@ -11,25 +11,36 @@
   margin-bottom: 20px;
 }
 
-.text-container{
+.app-content{
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px 0;
+  width: 100%;
+  margin-bottom: 20px;
+  flex-grow: 1;
+
 }
 
-.text-content {
+.text-we-are-bremen {
   display: flex;
   align-items: center;
-  font-weight: 700;
-  font-size: 25px;
-  color: var(--on-primary);
+  justify-content: center;
+  width: 100%;
 }
 
 .text-we-are{
   font-family: 'ClashDisplay';
+  font-size: 25px;
   font-weight: 300;  
   margin-right: 5px;
+  color : var(--on-primary);
+}
+
+.text-bremen{
+  font-family: 'ClashDisplay';
+  font-weight: 700;
+  font-size: 25px;
+  color : var(--on-primary);
 }
 
 .text-with-icon {
@@ -37,10 +48,7 @@
   align-items: center;
 }
 
-.text-bremen{
-  font-family: 'ClashDisplay';
-  font-weight: 700;
-}
+
 
 .icon {
   margin-left: 5px;
