@@ -1,0 +1,111 @@
+.featured-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    background: linear-gradient(0deg, var(--accent), #fff); /* Example gradient */
+    color: white;
+  }
+
+  .artist-info{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-left: 50px;
+    margin-right: 20px;
+  }
+
+  .artist-description{
+    font-family: 'ClashDisplay';
+    font-size: 16px;
+    font-weight: 700;
+    margin-right: 5px;
+    color: var(--tertiary);
+    width: 50%;
+  }
+
+  .text-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .text-we-are-bremen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .text-we-are {
+    font-family: 'ClashDisplay';
+    font-size: 25px;
+    font-weight: 300;
+    margin-right: 5px;
+    color: var(--on-primary);
+  }
+  
+  .text-bremen {
+    font-family: 'ClashDisplay';
+    font-weight: 700;
+    font-size: 25px;
+    color: var(--on-primary);
+  }
+  
+  .text-with-icon {
+    display: flex;
+    align-items: center;
+  }
+  
+  .icon {
+    margin-left: 5px;
+    height: 17px;
+  }
+
+  .text-featured {
+    font-family: 'ClashDisplay';
+    font-size: 60px;
+    font-weight: 700;
+    margin-top: 2px;
+    color: var(--accent);
+  }
+
+  .slide {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pictures-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.picture {
+    width: 100px;
+    height: 100px;
+    margin: 5px;
+    border-radius: 10px;
+}
+
+.arrow {
+    cursor: pointer;
+    font-size: 24px;
+    color: var(--on-primary);
+    user-select: none;
+}
+
+.left-arrow {
+    position: absolute;
+    left: 10px;
+}
+
+.right-arrow {
+    position: absolute;
+    right: 10px;
+}

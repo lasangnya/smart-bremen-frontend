@@ -21,36 +21,3 @@
 
 }
 
-.text-we-are-bremen {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
-
-.text-we-are{
-  font-family: 'ClashDisplay';
-  font-size: 25px;
-  font-weight: 300;  
-  margin-right: 5px;
-  color : var(--on-primary);
-}
-
-.text-bremen{
-  font-family: 'ClashDisplay';
-  font-weight: 700;
-  font-size: 25px;
-  color : var(--on-primary);
-}
-
-.text-with-icon {
-  display: flex;
-  align-items: center;
-}
-
-
-
-.icon {
-  margin-left: 5px;
-  height: 17px;
-}

@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-route
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Button from './components/Button';
+import Featured from './components/Featured';
 import ContactUs from './pages/ContactUs';
-import SmartBremenLines from './assets/icons/smart_bremen_lines.svg'
 import './styles/colors.css';
 import './App.css';
 import routes from "./routes";
@@ -21,16 +21,10 @@ const App = () => {
   return (
     <div className='app-container'>
       <Header />
+      <Featured />
       <div className='app-content'>
-        <div className='text-we-are-bremen'>
-          <span className='text-we-are'>WE ARE</span>
-          <span className='text-with-icon'>
-            <span className='text-bremen'>BREMEN</span>
-            <img src={SmartBremenLines} alt='lines' className='icon'/>
-          </span>          
-        </div>
       </div>
-      <div style={{textAlign : 'center', margin: '20px 0', fontFamily: 'CircularStd', fontWeight:'700', color: 'var(--secondary)', fontSize: '25px'}}>
+      <div style={{ textAlign: 'center', margin: '20px 0', fontFamily: 'CircularStd', fontWeight: '700', color: 'var(--secondary)', fontSize: '25px' }}>
         Like to get featured?
       </div>
       <div className='button-container'>
@@ -46,7 +40,7 @@ const AppWrapper = () => {
     <Routes>
       {/* Default route */}
       <Route path={routes.home} element={<App />} />
-      
+
       {/* Contact Us route */}
       <Route path={routes.contactUs} element={<ContactUs />} />
 
