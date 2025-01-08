@@ -3,14 +3,14 @@
         "artist": {
             "name": "The Weeknd",
             "category": "Artist",
-            "displayPicture": "https://www.pexels.com/photo/photo-of-woman-painting-on-wall-1340502/",
+            "displayPicture": "../assets/images/sampleImage.jpg",
             "description": "The Weeknd is a Canadian singer, songwriter, and record producer. He is known for his dark, atmospheric music and often explores themes of loneliness, heartbreak, and trauma.",
             "pictures": [
-                "https://www.pexels.com/photo/photo-of-woman-painting-on-wall-1340502/",
-                "https://www.pexels.com/photo/photo-of-woman-painting-on-wall-1340502/",
-                "https://www.pexels.com/photo/photo-of-woman-painting-on-wall-1340502/",
-                "https://www.pexels.com/photo/photo-of-woman-painting-on-wall-1340502/",
-                "https://www.pexels.com/photo/photo-of-woman-painting-on-wall-1340502/"
+                "../assets/images/sampleImage.jpg",
+                "../assets/images/sampleImage.jpg",
+                "../assets/images/sampleImage.jpg",
+                "../assets/images/sampleImage.jpg",
+                "../assets/images/sampleImage.jpg"
             ]
         }
     },
@@ -18,14 +18,14 @@
         "artist": {
             "name": "Dua Lipa",
             "category": "Artist",
-            "displayPicture": "https://www.pexels.com/photo/photo-of-woman-painting-on-wall-1340502/",
+            "displayPicture": "../assets/images/sampleImage.jpg",
             "description": "Dua Lipa is an English singer, songwriter, and model. She is known for her powerful voice, catchy pop songs, and bold fashion choices.",
             "pictures": [
-                "https://www.pexels.com/photo/photo-of-woman-painting-on-wall-1340502/",
-                "https://www.pexels.com/photo/photo-of-woman-painting-on-wall-1340502/",
-                "https://www.pexels.com/photo/photo-of-woman-painting-on-wall-1340502/",
-                "https://www.pexels.com/photo/photo-of-woman-painting-on-wall-1340502/",
-                "https://www.pexels.com/photo/photo-of-woman-painting-on-wall-1340502/"
+                "../assets/images/sampleImage.jpg",
+                "../assets/images/sampleImage.jpg",
+                "../assets/images/sampleImage.jpg",
+                "../assets/images/sampleImage.jpg",
+                "../assets/images/sampleImage.jpg"
             ]
         }
     }

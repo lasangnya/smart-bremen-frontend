@@ -2,7 +2,7 @@
   padding-top:60px ;
   display: flex;
   flex-direction: column;
-  min-height: 300vh;
+  min-height: 100vh;
 }
 
 .button-container{
@@ -18,6 +18,5 @@
   width: 100%;
   margin-bottom: 20px;
   flex-grow: 1;
-
 }
 

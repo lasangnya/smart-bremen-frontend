@@ -7,7 +7,7 @@ const Button = ({ text, onClick }) => {
         <button className="custom-button" onClick={onClick}>
             {text}
             <span className="circle">
-                <img src={arrowIcon} alt="Arrow" className="icon"/>
+                <img src={arrowIcon} alt="Arrow" className="icon arrow-icon"/>
             </span>
         </button>
     );

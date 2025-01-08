@@ -1,22 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SmartBremenLines from '../assets/icons/smart_bremen_lines.svg';
 import featuredData from '../data/featuredData';
 import './featured.css';
 import ArtistProfileandName from './ArtistProfileandName';
+import Button from './Button';
 
 const Featured = () => {
-
-    const[currentSlide, setCurrentSlide] = useState(0);
+    const [currentSlide, setCurrentSlide] = useState(0);
 
     const handlePrevClick = () => {
         setCurrentSlide((prevSlide) => (prevSlide === 0 ? featuredData.length - 1 : prevSlide - 1));
-      };
-    
-      const handleNextClick = () => {
-        setCurrentSlide((prevSlide) => (prevSlide === featuredData.length - 1 ? 0 : prevSlide + 1));
-      };
+    };
 
-      const { artist } = featuredData[currentSlide];
+    const handleNextClick = () => {
+        setCurrentSlide((prevSlide) => (prevSlide === featuredData.length - 1 ? 0 : prevSlide + 1));
+    };
+
+    const { artist } = featuredData[currentSlide];
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            handleNextClick();
+        }, 10000);
+        return () => clearInterval(interval);
+    }, [currentSlide]);
 
     return (
         <div className="featured-container">
@@ -31,20 +38,23 @@ const Featured = () => {
                 <div className="text-featured">
                     FEATURED
                 </div>
-            </div>
-            <div className='arrow left-arrow' onClick={handlePrevClick}>&#9664;</div>
+            </div>            
             <div className='slide'>
                 <div className="pictures-container">
-                        {artist.pictures.map((picture, index) => (
-                            <img key={index} src={picture} alt={`Artist ${artist.name} picture ${index}`} className="picture" />
-                        ))}
+                    {artist.pictures.concat(artist.pictures).map((picture, index) => (
+                        <img key={index} src={picture} alt={`Artist ${artist.name} picture ${index}`} className="picture" />
+                    ))}
                 </div>
                 <div className='artist-info'>
                     <div className='artist-description'>{artist.description}</div>
                     <ArtistProfileandName artist={artist} />
-                </div>                
+                </div>
             </div>
+            <div className='arrow left-arrow' onClick={handlePrevClick}>&#9664;</div>
             <div className="arrow right-arrow" onClick={handleNextClick}>&#9654;</div>
+            <div className='button-container'>
+                <Button text="SEE MORE" onClick={() => {}} />
+            </div>
         </div>
     );
 };
