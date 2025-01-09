@@ -19,13 +19,24 @@ const MapView = () => {
   return (
     <div className='map-view'>
       <div className='map-container'>
-        {displayedArtists.map((artist, index) => (
-          <ArtistProfilePicture
-            key={index}
-            artist={artist}
-            size={{ width: `${Math.random() * 50 + 100}px`, height: `${Math.random() * 50 + 100}px` }}
-          />
-        ))}
+        <div className='left-column'>
+          {displayedArtists.slice(0, 3).map((artist, index) => (
+            <ArtistProfilePicture
+              key={index}
+              artist={artist}
+              size={{ width: `${Math.random() * 50 + 100}px`, height: `${Math.random() * 50 + 100}px` }}
+            />
+          ))}
+        </div>
+        <div className='right-column'>
+          {displayedArtists.slice(3, 6).map((artist, index) => (
+            <ArtistProfilePicture
+              key={index}
+              artist={artist}
+              size={{ width: `${Math.random() * 50 + 100}px`, height: `${Math.random() * 50 + 100}px` }}
+            />
+          ))}
+        </div>
       </div>
       <div className='who-are-we-button-container'>
         <Button text="WHO ARE WE" onClick={() => {}} />
