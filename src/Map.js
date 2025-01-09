@@ -62,6 +62,42 @@ const MaskLayer = ({ geojsonUrl }) => {
     );
     map.setMinZoom(11);
 
+    const LeafIcon = L.Icon.extend({
+      options: {
+        shadowUrl: "https://docs.maptiler.com/leaflet/assets/leaf_shadow.png",
+        iconSize: [38, 95],
+        shadowSize: [50, 64],
+        iconAnchor: [22, 94],
+        shadowAnchor: [4, 62],
+        popupAnchor: [-3, -76],
+      },
+    });
+
+    const leafIcon = new LeafIcon({
+      iconUrl: "https://docs.maptiler.com/leaflet/assets/leaf_marker.png",
+    });
+
+    // var helloPopup = L.popup().setContent("<b>Sample Text</b>");
+
+    L.marker([53.0765, 8.80681], { icon: leafIcon })
+      .addTo(map)
+      .on("click", function (e) {
+        // helloPopup.setLatLng(map.getCenter()).openOn(map);
+        console.log(e.latLng);
+      });
+
+    const icon = L.divIcon({
+      className: "custom-div-icon",
+      html: "<div style='background-color:#4838cc;' class='marker-pin'></div><img src = 'favicon.ico' alt='My Happy SVG'/>",
+      iconSize: [30, 42],
+      iconAnchor: [15, 42],
+    });
+    const newMarker = L.marker([53.0865, 8.80681], { icon: icon });
+
+    const popupContent = "Popup Content";
+    newMarker.bindPopup(popupContent).openPopup();
+    newMarker.addTo(map);
+
     // geoJsonLayer.bringToFront();
   }, [map, geojsonData]);
 
