@@ -4,10 +4,10 @@ import './artistprofilepicture.css';
 
 const ArtistProfilePicture = ({ artist }) => {
     return(
-        <div className='artist-profile'>
-            <div className='profile-picture-container'>
+        <div className='artist-profile-picture'>
+            <div className='artist-profile-picture-container'>
                 <img src={artist.profilePicture}  
-                className="profile-picture" alt={artist.name}/>
+                className="profile-picture-only" alt={artist.name}/>
             </div>            
         </div>
     );
