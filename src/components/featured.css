@@ -1,0 +1,129 @@
+.featured-container {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(0deg, var(--accent), #fff);
+    color: white;
+  }
+
+  .artist-info{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    margin-left: 50px;
+    margin-right: 20px;
+    width: 70%;
+    height: auto;
+  }
+
+  .artist-description{
+    font-family: 'ClashDisplay';
+    font-size: 20px;
+    font-weight: 700;
+    margin-right: 5px;
+    color: var(--tertiary);
+  }
+
+  .text-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .text-we-are-bremen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .text-we-are {
+    font-family: 'ClashDisplay';
+    font-size: 25px;
+    font-weight: 300;
+    margin-right: 5px;
+    color: var(--on-primary);
+  }
+  
+  .text-bremen {
+    font-family: 'ClashDisplay';
+    font-weight: 700;
+    font-size: 25px;
+    color: var(--on-primary);
+  }
+  
+  .text-with-icon {
+    display: flex;
+    align-items: center;
+  }
+  
+  .icon {
+    margin-left: 5px;
+    height: 17px;
+  }
+
+  .text-featured {
+    font-family: 'ClashDisplay';
+    font-size: 60px;
+    font-weight: 700;
+    margin-top: 2px;
+    color: var(--accent);
+  }
+
+  .slide {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: slideIn 1s ease-in-out forwards;
+}
+
+.pictures-container {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  white-space: nowrap;
+  animation: scroll 20s linear infinite;
+}
+
+.picture {
+  width: 200px;
+  height: 150px;
+  margin-left: 30px;
+  border-radius: 10px;
+  flex: 0 0 auto;
+  border: 2px solid var(--accent);
+}
+
+@keyframes scroll {
+  0% {
+      transform: translateX(0);
+  }
+  100% {
+      transform: translateX(-50%);
+  }
+}
+
+.arrow {
+  position: absolute; 
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 24px;
+  user-select: none;
+}
+
+.left-arrow {
+  left: 10px;
+}
+
+.right-arrow {
+  right: 10px;
+}

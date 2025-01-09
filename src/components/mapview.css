@@ -1,0 +1,59 @@
+.map-view {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .map-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+    width: 100%;
+    padding: 20px;
+  }
+  
+  .left-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  
+  .right-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 20px;
+  }
+  
+  .map-view .artist-profile {
+    animation: wiggle 3s infinite ease-in-out;
+  }
+  
+  .map-view .profile-picture {
+    border-radius: 50%;
+  }
+  
+  @keyframes wiggle {
+    0%, 100% {
+      transform: translate(0, 0);
+    }
+    25% {
+      transform: translate(2px, -2px);
+    }
+    50% {
+      transform: translate(-2px, 2px);
+    }
+    75% {
+      transform: translate(2px, 2px);
+    }
+  }
+  
+  .who-are-we-button-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px;
+  }

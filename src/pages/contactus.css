@@ -1,0 +1,60 @@
+.contactus-container{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.contactus-content{
+  padding-top : 80px;
+  max-width: 600px;
+  margin: 0 auto;
+  padding-bottom: 40px ;
+}
+
+.contactus-form{
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.form-group label{
+  font-family: 'CircularStd';
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--on-primary);
+}
+
+.form-group input,
+.form-group textarea {
+  background-color: var(--accent); 
+  padding: 8px;
+  border-radius: 10px;
+  width: 250px;
+}
+
+.send-message-button-container{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.send-message-button{
+  padding: 5px;
+  width: 100px;
+  margin-top: 10px;
+  background-color: var(--primary);
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 10px;
+  font-family: 'CircularStd';
+  font-weight: 700;
+  color: #fff;
+}
+
+.send-message-button:hover{
+  background-color: var(--tertiary);
+}

@@ -1,0 +1,32 @@
+[
+    {
+        "artist": {
+            "name": "The Weeknd",
+            "category": "Artist",
+            "displayPicture": "https://picsum.photos/200/300?random=1",
+            "description": "The Weeknd is a Canadian singer, songwriter, and record producer. He is known for his dark, atmospheric music and often explores themes of loneliness, heartbreak, and trauma.",
+            "pictures": [
+                "https://picsum.photos/600/400?random=11",
+                "https://picsum.photos/600/400?random=12",
+                "https://picsum.photos/600/400?random=13",
+                "https://picsum.photos/600/400?random=14",
+                "https://picsum.photos/600/400?random=15"
+            ]
+        }
+    },
+    {
+        "artist": {
+            "name": "Dua Lipa",
+            "category": "Artist",
+            "displayPicture": "https://picsum.photos/600/400?random=2",
+            "description": "Dua Lipa is an English singer, songwriter, and model. She is known for her powerful voice, catchy pop songs, and bold fashion choices.",
+            "pictures": [
+                "https://picsum.photos/600/400?random=21",
+                "https://picsum.photos/600/400?random=22",
+                "https://picsum.photos/600/400?random=23",
+                "https://picsum.photos/600/400?random=24",
+                "https://picsum.photos/600/400?random=25"
+            ]
+        }
+    }
+]
