@@ -1,0 +1,92 @@
+[
+  {
+    "name": "Artist One",
+    "category": "Painter",
+    "location": {
+      "longitude": -122.4194,
+      "latitude": 37.7749
+    },
+    "profilePicture": "https://picsum.photos/200/300?random=1",
+    "pictures": [
+      "https://picsum.photos/600/400?random=11",
+      "https://picsum.photos/600/400?random=12",
+      "https://picsum.photos/600/400?random=13"
+    ],
+    "description": "Artist One is a renowned painter known for abstract art."
+  },
+  {
+    "name": "Artist Two",
+    "category": "Sculptor",
+    "location": {
+      "longitude": -74.0060,
+      "latitude": 40.7128
+    },
+    "profilePicture": "https://picsum.photos/200/300?random=2",
+    "pictures": [
+      "https://picsum.photos/600/400?random=21",
+      "https://picsum.photos/600/400?random=22",
+      "https://picsum.photos/600/400?random=23"
+    ],
+    "description": "Artist Two creates stunning sculptures from recycled materials."
+  },
+  {
+    "name": "Artist Three",
+    "category": "Photographer",
+    "location": {
+      "longitude": -0.1276,
+      "latitude": 51.5074
+    },
+    "profilePicture": "https://picsum.photos/200/300?random=3",
+    "pictures": [
+      "https://picsum.photos/600/400?random=31",
+      "https://picsum.photos/600/400?random=32",
+      "https://picsum.photos/600/400?random=33"
+    ],
+    "description": "Artist Three captures the beauty of urban landscapes through photography."
+  },
+  {
+    "name": "Artist Four",
+    "category": "Sculptor",
+    "location": {
+      "longitude": -74.0060,
+      "latitude": 40.7128
+    },
+    "profilePicture": "https://picsum.photos/200/300?random=4",
+    "pictures": [
+      "https://picsum.photos/600/400?random=21",
+      "https://picsum.photos/600/400?random=22",
+      "https://picsum.photos/600/400?random=23"
+    ],
+    "description": "Artist Two creates stunning sculptures from recycled materials."
+  },
+  {
+    "name": "Artist Five",
+    "category": "Sculptor",
+    "location": {
+      "longitude": -74.0060,
+      "latitude": 40.7128
+    },
+    "profilePicture": "https://picsum.photos/200/300?random=5",
+    "pictures": [
+      "https://picsum.photos/600/400?random=21",
+      "https://picsum.photos/600/400?random=22",
+      "https://picsum.photos/600/400?random=23"
+    ],
+    "description": "Artist Two creates stunning sculptures from recycled materials."
+  },
+  {
+    "name": "Artist Six",
+    "category": "Sculptor",
+    "location": {
+      "longitude": -74.0060,
+      "latitude": 40.7128
+    },
+    "profilePicture": "https://picsum.photos/200/300?random=6",
+    "pictures": [
+      "https://picsum.photos/600/400?random=21",
+      "https://picsum.photos/600/400?random=22",
+      "https://picsum.photos/600/400?random=23"
+    ],
+    "description": "Artist Two creates stunning sculptures from recycled materials."
+  }
+]

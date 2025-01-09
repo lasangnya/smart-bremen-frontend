@@ -18,6 +18,8 @@
     margin-top: 50px;
     margin-left: 50px;
     margin-right: 20px;
+    width: 70%;
+    height: auto;
   }
 
   .artist-description{
@@ -26,7 +28,6 @@
     font-weight: 700;
     margin-right: 5px;
     color: var(--tertiary);
-    width: 50%;
   }
 
   .text-container{

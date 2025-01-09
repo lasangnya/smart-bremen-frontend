@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Button from './components/Button';
 import Featured from './components/Featured';
+import MapView from './components/MapView';
 import ContactUs from './pages/ContactUs';
 import './styles/colors.css';
 import './App.css';
@@ -21,6 +22,7 @@ const App = () => {
   return (
     <div className='app-container'>
       <Header />
+      <MapView />
       <Featured />
       <div className='app-content'>
       </div>

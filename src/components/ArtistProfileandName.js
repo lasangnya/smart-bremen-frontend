@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './artistnameandprofile.css';
+import './artistprofileandname.css';
 import blankProfilePicture from '../assets/images/blank-profile-picture.png';
 import SmartBremenLines from '../assets/icons/smart_bremen_lines.svg';
 
