@@ -23,7 +23,7 @@ const Header = () => {
 
   return (
     <header className="header">
-      <div className="header-section icon">
+      <div className="header-section icon" onClick={() => handleNavigation(routes.loginPage)} style={{cursor: 'pointer'}}>
       <img src={ic_profile} alt="profile-icon" />
       </div>
       <div
