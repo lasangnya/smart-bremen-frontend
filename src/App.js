@@ -97,6 +97,7 @@ import Featured from './components/Featured';
 import MapView from './components/MapView';
 import ContactUs from './pages/ContactUs';
 import LoginPage from './backend/pages/LoginPage';
+import Dashboard from './backend/pages/Dashboard';
 import './styles/colors.css';
 import './App.css';
 import routes from "./routes";
@@ -142,6 +143,9 @@ const AppWrapper = () => {
 
       {/* Login Page route */}
       <Route path={routes.loginPage} element={<LoginPage />} />
+
+      {/* Dashboard route */}
+      <Route path={routes.dashboard} element={<Dashboard />} />
     </Routes>
   );
 };

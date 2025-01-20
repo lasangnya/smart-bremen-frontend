@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from '../components/BackHeader';
 import Footer from '../../components/Footer';
 import logo from '../../assets/logos/logo_smart_bremen.svg';
 import './loginpage.css';
+import routes from '../../routes';
 
 function LoginPage({ onLogin }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
   
     const handleSubmit = (e) => {
       e.preventDefault();
       // Call backend API for authentication here
-      onLogin(); // Notify parent component of successful login
+      //onLogin(); // Notify parent component of successful login
+      navigate(routes.dashboard);
     };
   
     return (

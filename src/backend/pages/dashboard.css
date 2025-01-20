@@ -1,0 +1,49 @@
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .dashboard-container {
+    margin-top: 80px;
+    display: flex;
+    flex: 1;
+  }
+  
+  .sidebar {
+    width: 250px;
+    background-color: #fff;
+    padding-left: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    border-right: 2px solid var(--on-primary);
+  }
+  
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar ul li {
+    padding: 10px 0;
+    padding-left: 10px;
+    cursor: pointer;
+    font-family: 'CircularStd';
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .sidebar ul li:hover {
+    background-color: #ddd;
+  }
+
+  .sidebar ul li.active {
+    background-color: var(--on-primary);
+    color: #fff;
+  }
+  
+  .content {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+    overflow-y: auto;
+  }

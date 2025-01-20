@@ -1,0 +1,75 @@
+.add-new-location {
+    padding: 20px;
+    background-color: #fff;
+    width: 100%;
+    position: relative;
+  }
+  
+  .form-header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+  }
+  
+  .cancel-button {
+    background: none;
+    border: none;
+    color: var(--on-primary);
+    font-family: 'CircularStd';
+    font-size: 14px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  .submit-button {
+    padding: 10px 20px;
+    background-color: var(--primary);
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: 'CircularStd';
+    font-weight: 700;
+    color: #fff;
+    border: none;
+  }
+  
+  .submit-button:hover {
+    background-color: var(--tertiary);
+  }
+  
+  .add-new-location-form {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px; 
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    font-family: 'CircularStd';
+    font-weight: 400;
+    font-size: 14px;
+    color: var(--on-primary);
+    margin-bottom: 5px;
+  }
+  
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background-color: var(--accent);
+    padding: 8px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-family: 'CircularStd';
+    font-size: 14px;
+    color: #333;
+    width: 50%;
+  }
+  
+  .form-group input[type="file"] {
+    padding: 0;
+  }
