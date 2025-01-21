@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import Button from './Button';
-import './mapview.css';
-import ArtistProfilePicture from './ArtistProfilePicture';
-import artistData from '../data/artistData.json';
+import React, { useState, useEffect } from "react";
+import Button from "./Button";
+import "./mapview.css";
+import ArtistProfilePicture from "./ArtistProfilePicture";
+import artistData from "../data/artistData.json";
+import { SmartBremenMap } from "../Map";
 
 const MapView = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -17,28 +18,35 @@ const MapView = () => {
   const displayedArtists = artistData.slice(currentIndex, currentIndex + 6);
 
   return (
-    <div className='map-view'>
-      <div className='map-container'>
-        <div className='left-column'>
+    <div className="map-view">
+      <div className="map-container">
+        <div className="left-column">
           {displayedArtists.slice(0, 3).map((artist, index) => (
             <ArtistProfilePicture
               key={index}
               artist={artist}
-              size={{ width: `${Math.random() * 50 + 100}px`, height: `${Math.random() * 50 + 100}px` }}
+              size={{
+                width: `${Math.random() * 50 + 100}px`,
+                height: `${Math.random() * 50 + 100}px`,
+              }}
             />
           ))}
         </div>
-        <div className='right-column'>
+        {/* <SmartBremenMap /> */}
+        <div className="right-column">
           {displayedArtists.slice(3, 6).map((artist, index) => (
             <ArtistProfilePicture
               key={index}
               artist={artist}
-              size={{ width: `${Math.random() * 50 + 100}px`, height: `${Math.random() * 50 + 100}px` }}
+              size={{
+                width: `${Math.random() * 50 + 100}px`,
+                height: `${Math.random() * 50 + 100}px`,
+              }}
             />
           ))}
         </div>
       </div>
-      <div className='who-are-we-button-container'>
+      <div className="who-are-we-button-container">
         <Button text="WHO ARE WE" onClick={() => {}} />
       </div>
     </div>

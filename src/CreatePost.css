@@ -1,0 +1,95 @@
+.createpost-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.createpost-content {
+  padding-top: 80px;
+  max-width: 800px;
+  margin: 0 auto;
+  padding-bottom: 40px;
+}
+
+.createpost-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.card {
+  margin-bottom: 20px;
+  border-radius: 10px;
+  background-color: var(--background);
+  padding: 20px;
+}
+
+.card-header {
+  font-family: "CircularStd";
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--on-primary);
+  margin-bottom: 10px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  font-family: "CircularStd";
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--on-primary);
+  margin-bottom: 5px;
+}
+
+input,
+textarea,
+select {
+  background-color: var(--accent);
+  padding: 8px;
+  border-radius: 10px;
+  width: 100%;
+  border: none;
+}
+
+.form-group input[type="file"] {
+  padding: 4px;
+}
+
+.preview-images {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  margin-top: 10px;
+}
+
+.preview-images img {
+  max-width: 100px;
+  border-radius: 5px;
+}
+
+.createpost-button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.createpost-button {
+  padding: 10px;
+  width: 150px;
+  margin-top: 10px;
+  background-color: var(--primary);
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 12px;
+  font-family: "CircularStd";
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+}
+
+.createpost-button:hover {
+  background-color: var(--tertiary);
+}
