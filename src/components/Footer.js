@@ -12,6 +12,11 @@ const Footer = () => {
                     <img src={bremen_skyline} alt='Bremen Skyline' className='footer-skyline' />
                     <img src={bremen_skyline} alt='Bremen Skyline' className='footer-skyline' />
                     <img src={bremen_skyline} alt='Bremen Skyline' className='footer-skyline' />
+                    <img src={bremen_skyline} alt='Bremen Skyline' className='footer-skyline' />
+                    <img src={bremen_skyline} alt='Bremen Skyline' className='footer-skyline' />
+                    <img src={bremen_skyline} alt='Bremen Skyline' className='footer-skyline' />
+                    <img src={bremen_skyline} alt='Bremen Skyline' className='footer-skyline' />
+                    <img src={bremen_skyline} alt='Bremen Skyline' className='footer-skyline' />
                 </div>
             </div>
             <div className='footer-content'>

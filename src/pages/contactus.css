@@ -5,8 +5,8 @@
 }
 
 .contactus-content{
+  flex-grow: 1;
   padding-top : 80px;
-  max-width: 600px;
   margin: 0 auto;
   padding-bottom: 40px ;
 }
@@ -34,7 +34,8 @@
   background-color: var(--accent); 
   padding: 8px;
   border-radius: 10px;
-  width: 250px;
+  width: 100% !important;
+  max-width: 1000px;
 }
 
 .send-message-button-container{
