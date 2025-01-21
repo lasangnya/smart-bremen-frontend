@@ -1,9 +1,17 @@
+.login-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .container {
   display: flex;
   flex-direction: column;
-  height: 75vh;
   justify-content: center;
   align-items: center;
+  flex: 1; 
+  text-align: center;
+  width: 100%;
 }
 
 .logo-container {
@@ -38,6 +46,8 @@
   font-weight: 400;
   font-size: 14px;
   color: var(--on-primary);
+  text-align: left;
+  width: 100px;
 }
 
 .input-group input {
@@ -69,5 +79,7 @@
   font-size: 14px;
   color: var(--on-primary);
   margin-top: 10px;
-  text-align: center;
+  text-align: right;
+  display: block;
+  width: 100%;
 }

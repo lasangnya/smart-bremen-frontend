@@ -40,18 +40,6 @@ function Dashboard() {
             >
               Edit Existing Location
             </li>
-            <li
-              className={activeSection === "History" ? "active" : ""}
-              onClick={() => setActiveSection("History")}
-            >
-              History
-            </li>
-            <li
-              className={activeSection === "ProfileSettings" ? "active" : ""}
-              onClick={() => setActiveSection("ProfileSettings")}
-            >
-              Profile Settings
-            </li>
           </ul>
         </nav>
         <main className="content">{renderSection()}</main>
