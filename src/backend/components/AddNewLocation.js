@@ -57,24 +57,29 @@ function AddNewLocation() {
           </select>
         </div>
         <div className="form-group">
-          <label htmlFor="longitude">Longitude</label>
-          <input
-            type="text"
-            id="longitude"
-            value={longitude}
-            onChange={(e) => setLongitude(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="latitude">Latitude</label>
-          <input
-            type="text"
-            id="latitude"
-            value={latitude}
-            onChange={(e) => setLatitude(e.target.value)}
-            required
-          />
+          <label>Location</label>
+          <div className="location-inputs">
+            <div className="input-container">
+              <label htmlFor="longitude">Longitude</label>
+              <input
+                type="text"
+                id="longitude"
+                value={longitude}
+                onChange={(e) => setLongitude(e.target.value)}
+                required
+              />
+            </div>
+            <div className="input-container">
+              <label htmlFor="latitude">Latitude</label>
+              <input
+                type="text"
+                id="latitude"
+                value={latitude}
+                onChange={(e) => setLatitude(e.target.value)}
+                required
+              />
+            </div>
+          </div>
         </div>
         <div className="form-group">
           <label htmlFor="description">Description</label>
@@ -85,25 +90,110 @@ function AddNewLocation() {
             required
           />
         </div>
-        <div className="form-group">
+        <div className="form-group display-picture">
           <label htmlFor="displayPicture">Display Picture</label>
+          {displayPicture ? (
+            <div className="preview-container">
+              <img
+                src={URL.createObjectURL(displayPicture)}
+                alt="Preview"
+                className="preview-image"
+              />
+              <div className="preview-actions">
+                <button
+                  type="button"
+                  className="change-button"
+                  onClick={() => document.getElementById("displayPicture").click()}
+                >
+                  Change
+                </button>
+                <button
+                  type="button"
+                  className="remove-button"
+                  onClick={() => setDisplayPicture(null)}
+                >
+                  Remove
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div
+              className="upload-placeholder"
+              onDragOver={(e) => e.preventDefault()}
+              onDrop={(e) => {
+                e.preventDefault();
+                if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+                  setDisplayPicture(e.dataTransfer.files[0]);
+                }
+              }}
+            >
+              <p>Drop your image here or</p>
+              <button
+                type="button"
+                className="browse-button"
+                onClick={() => document.getElementById("displayPicture").click()}
+              >
+                Browse
+              </button>
+            </div>
+          )}
           <input
             type="file"
             id="displayPicture"
             accept="image/*"
-            onChange={handleDisplayPictureChange}
-            required
+            onChange={(e) => setDisplayPicture(e.target.files[0])}
+            style={{ display: "none" }}
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="gallery">Gallery</label>
-          <input
-            type="file"
-            id="gallery"
-            accept="image/*"
-            multiple
-            onChange={handleGalleryChange}
-          />
+        <div className="form-group gallery">
+          <label>Gallery</label>
+          <div
+            className="gallery-container"
+            onDragOver={(e) => e.preventDefault()} // Allow drop by preventing default behavior
+            onDrop={(e) => {
+              e.preventDefault(); // Prevent default behavior
+              if (e.dataTransfer.files) {
+                setGallery([...gallery, ...Array.from(e.dataTransfer.files)]); // Append dropped files
+              }
+            }}
+          >
+            {gallery.map((image, index) => (
+              <div key={index} className="gallery-item">
+                <img
+                  src={URL.createObjectURL(image)}
+                  alt={`Gallery Preview ${index}`}
+                  className="gallery-image"
+                />
+                <button
+                  type="button"
+                  className="remove-button"
+                  onClick={() => {
+                    setGallery(gallery.filter((_, i) => i !== index));
+                  }}
+                >
+                  Remove
+                </button>
+              </div>
+            ))}
+            <div
+              className="gallery-upload-placeholder"
+              onClick={() => document.getElementById(`gallery-upload-${gallery.length}`).click()}
+            >
+              <span className="plus-icon">+</span>
+            </div>
+            <input
+              type="file"
+              id={`gallery-upload-${gallery.length}`}
+              accept="image/*"
+              multiple
+              style={{ display: "none" }}
+              onChange={(e) => {
+                if (e.target.files) {
+                  setGallery([...gallery, ...Array.from(e.target.files)]);
+                }
+              }}
+            />
+          </div>
         </div>
       </form>
     </div>
