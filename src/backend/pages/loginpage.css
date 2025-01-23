@@ -83,3 +83,17 @@
   display: block;
   width: 100%;
 }
+
+.signup-link {
+  font-family: 'CircularStd';
+  font-size: 14px;
+  color: var(--on-primary);
+  margin-top: 30px;
+  text-align: center;
+  display: block;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.signup-link:hover {
+  color: var(--tertiary);
+}

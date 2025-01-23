@@ -2,6 +2,7 @@ import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
 import LoginPage from "./backend/pages/LoginPage";
 import Dashboard from "./backend/pages/Dashboard";
+import SignupPage from "./backend/pages/SignupPage";
 
 const routes = {
     home : '/',
@@ -9,6 +10,7 @@ const routes = {
     aboutUs : '/aboutus',
     loginPage : '/login',
     dashboard : '/dashboard',
+    signupPage : '/signup',
 };
 
 export default routes;

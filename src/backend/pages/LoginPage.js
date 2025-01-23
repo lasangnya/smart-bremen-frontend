@@ -47,6 +47,7 @@ function LoginPage({ onLogin }) {
               </div>
               <a href="/forgot-password" className='forgot-password'>Forgot Password?</a>
               <button type="submit" className="button">Login</button>
+              <a href="/signup" className="signup-link">Don’t have an account? Create one here</a>
             </form>            
           </div>
         </div>

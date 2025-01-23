@@ -98,6 +98,7 @@ import MapView from './components/MapView';
 import ContactUs from './pages/ContactUs';
 import LoginPage from './backend/pages/LoginPage';
 import Dashboard from './backend/pages/Dashboard';
+import SignupPage from './backend/pages/SignupPage';
 import './styles/colors.css';
 import './App.css';
 import routes from "./routes";
@@ -143,6 +144,9 @@ const AppWrapper = () => {
 
       {/* Login Page route */}
       <Route path={routes.loginPage} element={<LoginPage />} />
+
+      {/* Signup route */}
+      <Route path={routes.signupPage} element={<SignupPage />} />
 
       {/* Dashboard route */}
       <Route path={routes.dashboard} element={<Dashboard />} />

@@ -2,6 +2,7 @@
   padding: 20px;
   background-color: #fff;
   font-family: 'CircularStd';
+  width: 100%;
 }
 
 .post-row {
@@ -15,6 +16,7 @@
   align-items: center;
   font-size: 14px;
   color: #333;
+  width: 100%;
 }
 
 .row-header span {
