@@ -151,8 +151,9 @@ import Button from "./components/Button";
 import Featured from "./components/Featured";
 import MapView from "./components/MapView";
 import ContactUs from "./pages/ContactUs";
-import Login from "./pages/login";
-
+import LoginPage from "./backend/pages/LoginPage";
+import Dashboard from "./backend/pages/Dashboard";
+import SignupPage from "./backend/pages/SignupPage";
 import "./styles/colors.css";
 import "./App.css";
 import routes from "./routes";
@@ -210,6 +211,15 @@ const AppWrapper = () => {
 
       {/* About Us route */}
       <Route path={routes.aboutUs} element={<AboutUs />} />
+
+      {/* Login Page route */}
+      <Route path={routes.loginPage} element={<LoginPage />} />
+
+      {/* Signup route */}
+      <Route path={routes.signupPage} element={<SignupPage />} />
+
+      {/* Dashboard route */}
+      <Route path={routes.dashboard} element={<Dashboard />} />
     </Routes>
   );
 };

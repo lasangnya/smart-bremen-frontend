@@ -1,0 +1,33 @@
+[
+    {
+      "id": 1,
+      "name": "Jane Doe",
+      "date": "22-01-2025",
+      "time": "23:59",
+      "category": "Artist",
+      "location": { "longitude": "50.123456", "latitude": "8.123456" },
+      "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. ",
+      "displayPicture": "https://picsum.photos/600/400?random=10",
+      "gallery": [
+        "https://picsum.photos/600/400?random=21",
+        "https://picsum.photos/600/400?random=22",
+        "https://picsum.photos/600/400?random=23"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "James Doe",
+      "date": "22-01-2025",
+      "time": "23:59",
+      "category": "Business",
+      "location": { "longitude": "50.123456", "latitude": "8.123456" },
+      "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. ",
+      "displayPicture": "https://picsum.photos/600/400?random=11",
+      "gallery": [
+        "https://picsum.photos/600/400?random=24",
+        "https://picsum.photos/600/400?random=25",
+        "https://picsum.photos/600/400?random=26"
+      ]
+    }
+  ]
+  

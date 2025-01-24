@@ -1,0 +1,99 @@
+.login-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1; 
+  text-align: center;
+  width: 100%;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 120px;
+  margin-bottom: 20px;
+}
+
+.logo-container img {
+  width: 200px;
+  height: auto;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.input-group label {
+  font-family: 'CircularStd';
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--on-primary);
+  text-align: left;
+  width: 100px;
+}
+
+.input-group input {
+  background-color: var(--accent);
+  padding: 8px;
+  border-radius: 10px;
+  width: 400px;
+}
+
+.button {
+  padding: 10px 20px;
+  margin-top: 20px;
+  background-color: var(--primary);
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: 'CircularStd';
+  font-weight: 700;
+  color: #fff;
+  align-self: center;
+}
+
+.button:hover {
+  background-color: var(--tertiary);
+}
+
+.forgot-password{
+  font-family: 'CircularStd';
+  font-size: 14px;
+  color: var(--on-primary);
+  margin-top: 10px;
+  text-align: right;
+  display: block;
+  width: 100%;
+}
+
+.signup-link {
+  font-family: 'CircularStd';
+  font-size: 14px;
+  color: var(--on-primary);
+  margin-top: 30px;
+  text-align: center;
+  display: block;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.signup-link:hover {
+  color: var(--tertiary);
+}
