@@ -207,7 +207,7 @@ const AppWrapper = () => {
       {/* Contact Us route */}
       <Route path={routes.contactUs} element={<ContactUs />} />
 
-      <Route path={routes.login} element={<Login />} />
+      {/* <Route path={routes.login} element={<Login />} /> */}
 
       {/* About Us route */}
       <Route path={routes.aboutUs} element={<AboutUs />} />
