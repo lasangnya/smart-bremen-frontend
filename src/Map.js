@@ -300,6 +300,8 @@ import routes from "./routes";
 const SmartBremenMap = () => {
   const [posts, setPosts] = useState("");
   const { token } = useAuth();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -309,8 +311,15 @@ const SmartBremenMap = () => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((res) => setPosts(res.data))
-      .catch((err) => console.error("Error fetching informality layers:", err));
+      .then((res) => {
+        setPosts(res.data || []); // Ensure `res.data` is an array
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Error fetching posts:", err);
+        setError("Failed to load posts.");
+        setLoading(false);
+      });
   }, []);
 
   const icon = L.icon({
@@ -418,6 +427,9 @@ const SmartBremenMap = () => {
     return null;
   };
 
+  if (loading) return <div>Loading...</div>;
+  // if (error) return <div>{error}</div>;
+
   return (
     <div style={{ position: "relative", width: "100%", height: "80vh" }}>
       <CloseablePopup />
@@ -427,13 +439,37 @@ const SmartBremenMap = () => {
         style={{ height: "100%", width: "100%" }}
       >
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+
         {markerPosition && (
           <Marker position={markerPosition} icon={icon}>
-            {" "}
-            {/* Set the custom icon */}
-            {/* <Popup>You clicked here!</Popup> */}
+            {/* Custom icon marker */}
           </Marker>
         )}
+
+        {/* Check if posts.data exists and map only valid entries */}
+        {posts?.data?.map((post) => {
+          const latitude = post?.images?.[0]?.metadata?.latitude;
+          const longitude = post?.images?.[0]?.metadata?.longitude;
+
+          if (latitude && longitude) {
+            return (
+              <Marker
+                icon={icon}
+                key={post.id}
+                position={[longitude, latitude]}
+              >
+                <Popup>
+                  <strong>{post.title}</strong>
+                  <br />
+                  {post.description}
+                </Popup>
+              </Marker>
+            );
+          }
+
+          return null; // Skip entries with invalid lat/lng
+        })}
+
         <MapEvents />
       </MapContainer>
     </div>
