@@ -5,15 +5,19 @@ import PostRequests from "../components/PostRequests";
 import Users from "../components/Users";
 import Header from "../components/BackHeader";
 import Footer from "../../components/Footer";
-import './dashboard.css';
+import "./dashboard.css";
+import { useLocation } from "react-router-dom";
+import { marker } from "leaflet";
 
 function Dashboard() {
   const [activeSection, setActiveSection] = useState("AddNewLocation");
+  const location = useLocation();
+  const { markerPosition } = location.state || {}; // Access the state data
 
   const renderSection = () => {
     switch (activeSection) {
       case "AddNewLocation":
-        return <AddNewLocation />;
+        return <AddNewLocation markerPosition={markerPosition} />;
       case "EditExistingLocation":
         return <div>Edit Existing Location</div>;
       case "UserRequests":
@@ -32,7 +36,7 @@ function Dashboard() {
       <Header />
       <div className="dashboard-container">
         <nav className="sidebar">
-        <ul>
+          <ul>
             <li
               className={activeSection === "AddNewLocation" ? "active" : ""}
               onClick={() => setActiveSection("AddNewLocation")}
@@ -40,7 +44,9 @@ function Dashboard() {
               Add New Location
             </li>
             <li
-              className={activeSection === "EditExistingLocation" ? "active" : ""}
+              className={
+                activeSection === "EditExistingLocation" ? "active" : ""
+              }
               onClick={() => setActiveSection("EditExistingLocation")}
             >
               Edit Existing Location

@@ -285,17 +285,42 @@
 //   );
 // };
 import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
+
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, useMap, Marker, Popup } from "react-leaflet";
 import CreatePost from "./CreatePost";
+import { useAuth } from "./backend/components/AuthContext";
+import "./map.css";
+import iconSVG from "./assets/icons/marker.svg";
+import { useNavigate } from "react-router";
+import routes from "./routes";
 
-const SmartBremenMap = ({ token }) => {
-  const icon = L.divIcon({
-    className: "custom-div-icon",
-    html: "<div style='background-color:#4838cc;' class='marker-pin'></div><img src = 'favicon.ico' alt='My Happy SVG'/>",
-    iconSize: [30, 42],
-    iconAnchor: [15, 42],
+const SmartBremenMap = () => {
+  const [posts, setPosts] = useState("");
+  const { token } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    axios
+      .get("http://127.0.0.1:8082/api/posts", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => setPosts(res.data))
+      .catch((err) => console.error("Error fetching informality layers:", err));
+  }, []);
+
+  const icon = L.icon({
+    iconUrl: iconSVG,
+    iconSize: [38, 95],
+    iconAnchor: [19, 78],
+    // popupAnchor: [-3, -76],
+    // shadowUrl: "my-icon-shadow.png",
+    // shadowSize: [68, 95],
+    // shadowAnchor: [22, 94],
   });
 
   const [markerPosition, setMarkerPosition] = useState(null);
@@ -306,14 +331,16 @@ const SmartBremenMap = ({ token }) => {
   });
 
   const handleMapClick = (e) => {
-    const { lat, lng } = e.latlng;
+    if (token) {
+      const { lat, lng } = e.latlng;
 
-    setMarkerPosition([lat, lng]); // Set the marker position to the clicked location
+      setMarkerPosition([lat, lng]); // Set the marker position to the clicked location
 
-    setPopupData({
-      visible: true,
-      position: { lat, lng },
-    });
+      setPopupData({
+        visible: true,
+        position: { lat, lng },
+      });
+    }
   };
 
   const CloseablePopup = () =>
@@ -333,12 +360,35 @@ const SmartBremenMap = ({ token }) => {
         }}
       >
         <div style={{ textAlign: "center" }}>
-          <h3 style={{ fontSize: "16px", margin: "5px 0" }}>Create Post</h3>
+          <h3 style={{ fontSize: "16px", margin: "5px 0" }}>
+            Create a new Post at this Location
+          </h3>
           <button
-            onClick={() => setPopupData({ visible: false, position: {} })}
+            onClick={() =>
+              navigate(routes.dashboard, {
+                state: {
+                  markerPosition: markerPosition,
+                },
+              })
+            }
             style={{
               background: "#4838cc",
               color: "white",
+              border: "none",
+              padding: "5px 10px",
+              borderRadius: "5px",
+              cursor: "pointer",
+              marginBottom: "10px",
+              marginRight: "10px",
+            }}
+          >
+            Create
+          </button>
+          <button
+            onClick={() => setPopupData({ visible: false, position: {} })}
+            style={{
+              // background: "#4838cc",
+              color: "black",
               border: "none",
               padding: "5px 10px",
               borderRadius: "5px",
@@ -349,18 +399,20 @@ const SmartBremenMap = ({ token }) => {
             Close
           </button>
         </div>
-        <CreatePost
+        {/* <CreatePost
           token={token}
           latitude={popupData.position.lat}
           longitude={popupData.position.lng}
-        />
+        /> */}
       </div>
     );
 
   const MapEvents = () => {
     const map = useMap();
+
     useEffect(() => {
       map.on("click", handleMapClick);
+
       return () => map.off("click", handleMapClick);
     }, [map]);
     return null;

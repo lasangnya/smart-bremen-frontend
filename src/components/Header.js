@@ -1,12 +1,16 @@
 import React, { useState } from "react";
+import axios from "axios";
+
 import { useNavigate } from "react-router-dom";
 import "./header.css";
 import logo from "../assets/logos/logo_smart_bremen.svg";
 import ic_profile from "../assets/icons/ic_profile.svg";
 import navigation from "../assets/icons/navigation.svg";
 import routes from "../routes";
+import { useAuth } from "../backend/components/AuthContext"; // Import the context
 
 const Header = () => {
+  const { token, logout } = useAuth();
   const [isNavVisible, setIsNavVisible] = useState(false);
 
   const navigate = useNavigate();
@@ -18,6 +22,24 @@ const Header = () => {
   const handleNavigation = (path) => {
     navigate(path);
     setIsNavVisible(false);
+  };
+
+  const handleLogout = async () => {
+    console.log("aaaa");
+    try {
+      const authToken = localStorage.getItem("authToken");
+      if (authToken) {
+        await axios.post(
+          "http://127.0.0.1:8082/api/auth/logout",
+          {},
+          { headers: { Authorization: `Bearer ${authToken}` } }
+        );
+      }
+      logout();
+    } catch (err) {
+      console.error("Logout error:", err.response?.data || err.message);
+    }
+    navigate(routes.home);
   };
 
   return (
@@ -42,6 +64,26 @@ const Header = () => {
       {isNavVisible && (
         <div className="nav-popup">
           <ul>
+            {token ? (
+              <li onClick={() => handleLogout()} style={{ cursor: "pointer" }}>
+                Logout
+              </li>
+            ) : (
+              <>
+                <li
+                  onClick={() => handleNavigation(routes.loginPage)}
+                  style={{ cursor: "pointer" }}
+                >
+                  Login
+                </li>
+                <li
+                  onClick={() => handleNavigation(routes.signupPage)}
+                  style={{ cursor: "pointer" }}
+                >
+                  Signup
+                </li>
+              </>
+            )}
             <li
               onClick={() => handleNavigation(routes.contactUs)}
               style={{ cursor: "pointer" }}
@@ -53,12 +95,6 @@ const Header = () => {
               style={{ cursor: "pointer" }}
             >
               About Us
-            </li>
-            <li
-              onClick={() => handleNavigation(routes.login)}
-              style={{ cursor: "pointer" }}
-            >
-              Login
             </li>
           </ul>
         </div>

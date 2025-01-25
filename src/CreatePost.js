@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./CreatePost.css";
-import { useAuth } from "./pages/AuthContext";
+import { useAuth } from "./backend/components/AuthContext";
 
 const CreatePost = ({ latitude, longitude }) => {
   const { token } = useAuth(); // Retrieve the token from the context
