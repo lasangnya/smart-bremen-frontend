@@ -18,7 +18,6 @@ function LoginPage(/*{ onLogin }*/) { //un comment the onLogin parameter
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  // Authentication
   const [error, setError] = useState(null);
   const { token, login, logout } = useAuth();
 
@@ -44,7 +43,6 @@ function LoginPage(/*{ onLogin }*/) { //un comment the onLogin parameter
     // }
     // navigate(routes.home);
   };
-
   const handleLogout = async () => {
     //////////////mock logout - remove after test/////////////////////////////
     logout();
