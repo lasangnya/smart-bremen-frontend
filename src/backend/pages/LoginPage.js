@@ -10,10 +10,32 @@ import "./loginpage.css";
 import routes from "../../routes";
 
 function LoginPage({ onLogin }) {
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+  // const navigate = useNavigate();
+  // // Authentication
+  // const [error, setError] = useState(null);
+  // const { token, login, logout } = useAuth();
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const response = await axios.post(
+  //       "http://127.0.0.1:8082/api/auth/login",
+  //       { email, password }
+  //     );
+  //     const { token, user } = response.data;
+
+  //     login(token);
+  //   } catch (err) {
+  //     setError(err.response?.data?.message || "Login failed. Try again.");
+  //   }
+  //   navigate(routes.home);
+  // };
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  // Authentication
   const [error, setError] = useState(null);
   const { token, login, logout } = useAuth();
 
@@ -22,16 +44,18 @@ function LoginPage({ onLogin }) {
     try {
       const response = await axios.post(
         "http://127.0.0.1:8082/api/auth/login",
-        { email, password }
+        {
+          email,
+          password,
+        }
       );
-      const { token } = response.data;
-      login(token);
+      const { token, user } = response.data;
+      login(token, user);
+      navigate(routes.home);
     } catch (err) {
       setError(err.response?.data?.message || "Login failed. Try again.");
     }
-    navigate(routes.home);
   };
-
   const handleLogout = async () => {
     try {
       const authToken = localStorage.getItem("authToken");

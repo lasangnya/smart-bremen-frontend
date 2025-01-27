@@ -299,7 +299,7 @@ import routes from "./routes";
 
 const SmartBremenMap = () => {
   const [posts, setPosts] = useState("");
-  const { token } = useAuth();
+  const { token, user } = useAuth();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -312,7 +312,7 @@ const SmartBremenMap = () => {
         },
       })
       .then((res) => {
-        setPosts(res.data || []); // Ensure `res.data` is an array
+        setPosts(res.data || []);
         setLoading(false);
       })
       .catch((err) => {
@@ -327,7 +327,7 @@ const SmartBremenMap = () => {
     iconSize: [38, 95],
     iconAnchor: [19, 78],
     // popupAnchor: [-3, -76],
-    // shadowUrl: "my-icon-shadow.png",
+    // shadowUrl: "shadow.png",
     // shadowSize: [68, 95],
     // shadowAnchor: [22, 94],
   });
@@ -343,7 +343,7 @@ const SmartBremenMap = () => {
     if (token) {
       const { lat, lng } = e.latlng;
 
-      setMarkerPosition([lat, lng]); // Set the marker position to the clicked location
+      setMarkerPosition([lat, lng]);
 
       setPopupData({
         visible: true,
@@ -352,7 +352,7 @@ const SmartBremenMap = () => {
     }
   };
 
-  const CloseablePopup = () =>
+  const AddNewLocationPopup = () =>
     popupData.visible && (
       <div
         style={{
@@ -427,12 +427,12 @@ const SmartBremenMap = () => {
     return null;
   };
 
-  if (loading) return <div>Loading...</div>;
+  // if (loading) return <div>Loading...</div>;
   // if (error) return <div>{error}</div>;
 
   return (
     <div style={{ position: "relative", width: "100%", height: "80vh" }}>
-      <CloseablePopup />
+      <AddNewLocationPopup />
       <MapContainer
         center={[53.0765, 8.80681]}
         zoom={14}
@@ -441,12 +441,9 @@ const SmartBremenMap = () => {
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
         {markerPosition && (
-          <Marker position={markerPosition} icon={icon}>
-            {/* Custom icon marker */}
-          </Marker>
+          <Marker position={markerPosition} icon={icon}></Marker>
         )}
 
-        {/* Check if posts.data exists and map only valid entries */}
         {posts?.data?.map((post) => {
           const latitude = post?.images?.[0]?.metadata?.latitude;
           const longitude = post?.images?.[0]?.metadata?.longitude;
