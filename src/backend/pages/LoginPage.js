@@ -9,7 +9,12 @@ import logo from "../../assets/logos/logo_smart_bremen.svg";
 import "./loginpage.css";
 import routes from "../../routes";
 
-function LoginPage({ onLogin }) {
+const mockUser = {
+  email: "test@aa.com",
+  password: "11111111"
+}
+
+function LoginPage(/*{ onLogin }*/) { //un comment the onLogin parameter
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -19,34 +24,46 @@ function LoginPage({ onLogin }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post(
-        "http://127.0.0.1:8082/api/auth/login",
-        { email, password }
-      );
-      const { token } = response.data;
-      login(token);
-    } catch (err) {
-      setError(err.response?.data?.message || "Login failed. Try again.");
+    //////////////mock login - remove after test/////////////////////////////
+    if (email === mockUser.email && password === mockUser.password) {
+      const mockToken = "mock-auth-token"; 
+      login(mockToken);
+      navigate(routes.dashboard); 
+      setError("Invalid email or password");
     }
-    navigate(routes.home);
+    /////////////////////////////////////////////////////////////////////////
+    // try {
+    //   const response = await axios.post(
+    //     "http://127.0.0.1:8082/api/auth/login",
+    //     { email, password }
+    //   );
+    //   const { token } = response.data;
+    //   login(token);
+    // } catch (err) {
+    //   setError(err.response?.data?.message || "Login failed. Try again.");
+    // }
+    // navigate(routes.home);
   };
 
   const handleLogout = async () => {
-    try {
-      const authToken = localStorage.getItem("authToken");
-      if (authToken) {
-        await axios.post(
-          "http://127.0.0.1:8082/api/auth/logout",
-          {},
-          { headers: { Authorization: `Bearer ${authToken}` } }
-        );
-      }
-      logout();
-    } catch (err) {
-      console.error("Logout error:", err.response?.data || err.message);
-    }
-    navigate(routes.home);
+    //////////////mock logout - remove after test/////////////////////////////
+    logout();
+    navigate(routes.loginPage);
+    /////////////////////////////////////////////////////////////////////////
+    // try {
+    //   const authToken = localStorage.getItem("authToken");
+    //   if (authToken) {
+    //     await axios.post(
+    //       "http://127.0.0.1:8082/api/auth/logout",
+    //       {},
+    //       { headers: { Authorization: `Bearer ${authToken}` } }
+    //     );
+    //   }
+    //   logout();
+    // } catch (err) {
+    //   console.error("Logout error:", err.response?.data || err.message);
+    // }
+    // navigate(routes.home);
   };
 
   return (

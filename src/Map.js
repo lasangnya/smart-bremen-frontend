@@ -354,67 +354,33 @@ const SmartBremenMap = () => {
 
   const CloseablePopup = () =>
     popupData.visible && (
-      <div
-        style={{
-          position: "absolute",
-          top: "10px",
-          right: "10px",
-          background: "white",
-          padding: "15px",
-          borderRadius: "10px",
-          boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)",
-          zIndex: 1000,
-          width: "300px",
-          // border: "2px solid #4838cc",
-        }}
-      >
-        <div style={{ textAlign: "center" }}>
-          <h3 style={{ fontSize: "16px", margin: "5px 0" }}>
-            Create a new Post at this Location
-          </h3>
-          <button
-            onClick={() =>
-              navigate(routes.dashboard, {
-                state: {
-                  markerPosition: markerPosition,
-                },
-              })
-            }
-            style={{
-              background: "#4838cc",
-              color: "white",
-              border: "none",
-              padding: "5px 10px",
-              borderRadius: "5px",
-              cursor: "pointer",
-              marginBottom: "10px",
-              marginRight: "10px",
-            }}
-          >
-            Create
-          </button>
-          <button
-            onClick={() => setPopupData({ visible: false, position: {} })}
-            style={{
-              // background: "#4838cc",
-              color: "black",
-              border: "none",
-              padding: "5px 10px",
-              borderRadius: "5px",
-              cursor: "pointer",
-              marginBottom: "10px",
-            }}
-          >
-            Close
-          </button>
+      <div className="popup-container">
+        <div className="popup-header">
+          <h3>Create a new post at this location</h3>
         </div>
-        {/* <CreatePost
-          token={token}
-          latitude={popupData.position.lat}
-          longitude={popupData.position.lng}
-        /> */}
+        <div className="popup-button-container">
+        <button
+              className="submit-button"
+              onClick={() =>
+                navigate(routes.dashboard, {
+                  state: {
+                    markerPosition: markerPosition,
+                  },
+                })
+              }
+            >
+              Create
+            </button>
+            <button
+              className="cancel-button"
+              onClick={() => setPopupData({ visible: false, position: {} })}
+            >
+              Close
+            </button>        
+            
+        </div>
       </div>
-    );
+    );  
 
   const MapEvents = () => {
     const map = useMap();
