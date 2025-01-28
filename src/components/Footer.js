@@ -21,9 +21,12 @@ const Footer = () => {
                 </div>
             </div>
             <div className='footer-content'>
-                <div className='footer-logos'>
-                    <img src={logo} alt='Smart Bremen Logo' className='footer-logo' />
-                    <img src={uni_logo} alt='University of Bremen Logo' className='footer-logo' />
+                <div className='footer-left-portion'>
+                    <div className='footer-logos'>
+                        <img src={logo} alt='Smart Bremen Logo' className='footer-logo' />
+                        <img src={uni_logo} alt='University of Bremen Logo' className='footer-logo' />
+                    </div>
+                    <div className = 'footer-copyright-text'>Copyright © 2025 Smart Bremen - All Rights Reserved.</div>
                 </div>
                 <div className='footer-links'>
                     <div className = 'footer-contact'>

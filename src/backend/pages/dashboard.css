@@ -55,6 +55,15 @@
     padding: 10px 20px;
     text-align: right;
   }
+
+  .token-text {
+    font-family: 'CircularStd', sans-serif; 
+    font-size: 12px; 
+    color: var(--on-primary); 
+    margin-bottom: 2ch;  
+    word-break: break-word; 
+    text-align: left; 
+  }
   
   .logout-button {
     padding: 10px 20px;

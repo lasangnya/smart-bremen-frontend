@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth } from "../components/AuthContext"; // Import the context
 
@@ -20,6 +20,13 @@ function LoginPage(/*{ onLogin }*/) { //un comment the onLogin parameter
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const { token, login, logout } = useAuth();
+
+  useEffect(() => {
+    // Redirect to dashboard if a valid token exists
+    if (token) {
+      navigate(routes.dashboard);
+    }
+  }, [token, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -74,14 +81,6 @@ function LoginPage(/*{ onLogin }*/) { //un comment the onLogin parameter
           <img src={logo} alt="smart-bremen-logo" />
         </div>
         <div className="login-form">
-          {token ? (
-            <div className="logged-in-container">
-              <p>You are logged in with token: {token}</p>
-              <button onClick={handleLogout} className="logout-button">
-                Logout
-              </button>
-            </div>
-          ) : (
             <form onSubmit={handleSubmit}>
               <div className="input-group">
                 <label htmlFor="email">Email Address</label>
@@ -101,6 +100,7 @@ function LoginPage(/*{ onLogin }*/) { //un comment the onLogin parameter
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
+              {error && <p className="error-message">{error}</p>}
               <a href="/forgot-password" className="forgot-password">
                 Forgot Password?
               </a>
@@ -111,7 +111,6 @@ function LoginPage(/*{ onLogin }*/) { //un comment the onLogin parameter
                 Don’t have an account? Create one here
               </a>
             </form>
-          )}
         </div>
       </div>
       <Footer />

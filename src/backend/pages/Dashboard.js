@@ -14,7 +14,7 @@ function Dashboard() {
   const [activeSection, setActiveSection] = useState("AddNewLocation");
   const location = useLocation();
   const navigate = useNavigate();
-  const { logout } = useAuth();
+  const { token, logout } = useAuth();
   const { markerPosition } = location.state || {}; // Access the state data
 
 
@@ -97,6 +97,7 @@ function Dashboard() {
             </li>
           </ul>
           <div className="logout-button-container">
+            <p className="token-text">You are logged in with token: {token}</p>
             <button className="logout-button" onClick={handleLogout}>
               Logout
             </button>
