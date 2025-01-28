@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth } from "../components/AuthContext"; // Import the context
 
@@ -10,68 +10,34 @@ import "./loginpage.css";
 import routes from "../../routes";
 
 function LoginPage({ onLogin }) {
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const navigate = useNavigate();
-  // // Authentication
-  // const [error, setError] = useState(null);
-  // const { token, login, logout } = useAuth();
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const response = await axios.post(
-  //       "http://127.0.0.1:8082/api/auth/login",
-  //       { email, password }
-  //     );
-  //     const { token, user } = response.data;
-
-  //     login(token);
-  //   } catch (err) {
-  //     setError(err.response?.data?.message || "Login failed. Try again.");
-  //   }
-  //   navigate(routes.home);
-  // };
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const { token, login, logout } = useAuth();
 
+  useEffect(() => {
+    // Redirect to dashboard if a valid token exists
+    if (token) {
+      navigate(routes.dashboard);
+    }
+  }, [token, navigate]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post(
         "http://127.0.0.1:8082/api/auth/login",
-        {
-          email,
-          password,
-        }
+        { email, password }
       );
-      const { token, user } = response.data;
-      login(token, user);
-      navigate(routes.home);
+      const { token } = response.data;
+      login(token);
     } catch (err) {
       setError(err.response?.data?.message || "Login failed. Try again.");
     }
+    navigate(routes.dashboard);
   };
-  const handleLogout = async () => {
-    try {
-      const authToken = localStorage.getItem("authToken");
-      if (authToken) {
-        await axios.post(
-          "http://127.0.0.1:8082/api/auth/logout",
-          {},
-          { headers: { Authorization: `Bearer ${authToken}` } }
-        );
-      }
-      logout();
-    } catch (err) {
-      console.error("Logout error:", err.response?.data || err.message);
-    }
-    navigate(routes.home);
-  };
+
 
   return (
     <div className="login-page">
@@ -81,14 +47,6 @@ function LoginPage({ onLogin }) {
           <img src={logo} alt="smart-bremen-logo" />
         </div>
         <div className="login-form">
-          {token ? (
-            <div className="logged-in-container">
-              <p>You are logged in with token: {token}</p>
-              <button onClick={handleLogout} className="logout-button">
-                Logout
-              </button>
-            </div>
-          ) : (
             <form onSubmit={handleSubmit}>
               <div className="input-group">
                 <label htmlFor="email">Email Address</label>
@@ -108,6 +66,7 @@ function LoginPage({ onLogin }) {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
+              {error && <p className="error-message">{error}</p>}
               <a href="/forgot-password" className="forgot-password">
                 Forgot Password?
               </a>
@@ -118,7 +77,6 @@ function LoginPage({ onLogin }) {
                 Don’t have an account? Create one here
               </a>
             </form>
-          )}
         </div>
       </div>
       <Footer />

@@ -43,14 +43,7 @@ const Header = () => {
   };
 
   return (
-    <header className="header">
-      <div
-        className="header-section icon"
-        onClick={() => handleNavigation(routes.loginPage)}
-        style={{ cursor: "pointer" }}
-      >
-        <img src={ic_profile} alt="profile-icon" />
-      </div>
+    <header className="header">      
       <div
         className="header-section logo"
         onClick={() => handleNavigation(routes.home)}
@@ -58,10 +51,17 @@ const Header = () => {
       >
         <img src={logo} alt="smart-bremen-logo" />
       </div>
-      <div className="header-section nav" onClick={toggleNav}>
-        <img src={navigation} alt="navigation-menu-icon" />
+      <div
+        className="header-section icon"
+        onClick={() => handleNavigation(routes.loginPage)}
+        style={{ cursor: "pointer" }}
+      >
+        <img src={ic_profile} alt="profile-icon" />
       </div>
-      {isNavVisible && (
+      {/* <div className="header-section nav" onClick={toggleNav}>
+        <img src={navigation} alt="navigation-menu-icon" />
+      </div> */}
+      {/* {isNavVisible && (
         <div className="nav-popup">
           <ul>
             {token ? (
@@ -98,7 +98,7 @@ const Header = () => {
             </li>
           </ul>
         </div>
-      )}
+      )} */}
     </header>
   );
 };

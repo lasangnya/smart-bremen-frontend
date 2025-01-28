@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import AddNewLocation from "../components/AddNewLocation";
 import UserRequests from "../components/UserRequests";
 import PostRequests from "../components/PostRequests";
@@ -6,16 +7,34 @@ import Users from "../components/Users";
 import Header from "../components/BackHeader";
 import Footer from "../../components/Footer";
 import "./dashboard.css";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../components/AuthContext";
+import routes from "../../routes";
 import { marker } from "leaflet";
 
 function Dashboard() {
   const [activeSection, setActiveSection] = useState("AddNewLocation");
-  const { token, user } = useAuth(); // Retrieve the token from the context
-
   const location = useLocation();
+  const navigate = useNavigate();
+  const { token, logout } = useAuth();
   const { markerPosition } = location.state || {}; // Access the state data
+
+  const handleLogout = async () => {
+    try {
+      const authToken = localStorage.getItem("authToken");
+      if (authToken) {
+        await axios.post(
+          "http://127.0.0.1:8082/api/auth/logout",
+          {},
+          { headers: { Authorization: `Bearer ${authToken}` } }
+        );
+      }
+      logout();
+    } catch (err) {
+      console.error("Logout error:", err.response?.data || err.message);
+    }
+    navigate(routes.loginPage);
+  };
 
   const renderSection = () => {
     switch (activeSection) {
@@ -77,6 +96,12 @@ function Dashboard() {
               </>
             )}
           </ul>
+          <div className="logout-button-container">
+            <p className="token-text">You are logged in with token: {token}</p>
+            <button className="logout-button" onClick={handleLogout}>
+              Logout
+            </button>
+          </div>
         </nav>
         <main className="content">{renderSection()}</main>
       </div>
