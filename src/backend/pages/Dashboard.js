@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import AddNewLocation from "../components/AddNewLocation";
 import UserRequests from "../components/UserRequests";
 import PostRequests from "../components/PostRequests";
@@ -8,6 +9,7 @@ import Footer from "../../components/Footer";
 import "./dashboard.css";
 import { useLocation, useNavigate} from "react-router-dom";
 import { useAuth } from "../components/AuthContext"; 
+import routes from "../../routes";
 import { marker } from "leaflet";
 
 function Dashboard() {
@@ -19,24 +21,20 @@ function Dashboard() {
 
 
   const handleLogout = async () => {
-    //////////////mock logout - remove after test/////////////////////////////
-    logout();
-    navigate("/login");
-    /////////////////////////////////////////////////////////////////////////
-    // try {
-    //   const authToken = localStorage.getItem("authToken");
-    //   if (authToken) {
-    //     await axios.post(
-    //       "http://127.0.0.1:8082/api/auth/logout",
-    //       {},
-    //       { headers: { Authorization: `Bearer ${authToken}` } }
-    //     );
-    //   }
-    //   logout();
-    // } catch (err) {
-    //   console.error("Logout error:", err.response?.data || err.message);
-    // }
-    // navigate(routes.home);
+    try {
+      const authToken = localStorage.getItem("authToken");
+      if (authToken) {
+        await axios.post(
+          "http://127.0.0.1:8082/api/auth/logout",
+          {},
+          { headers: { Authorization: `Bearer ${authToken}` } }
+        );
+      }
+      logout();
+    } catch (err) {
+      console.error("Logout error:", err.response?.data || err.message);
+    }
+    navigate(routes.loginPage);
   };
 
 
