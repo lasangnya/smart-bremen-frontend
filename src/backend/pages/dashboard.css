@@ -15,11 +15,14 @@
     background-color: #fff;
     padding-left: 20px;
     border-right: 2px solid var(--on-primary);
+    display: flex;
+    flex-direction: column;
   }
   
   .sidebar ul {
     list-style: none;
     padding: 0;
+    flex-grow: 1;
   }
   
   .sidebar ul li {
@@ -46,4 +49,25 @@
     background-color: #fff;
     overflow-y: auto;
   }
+
+  .logout-button-container {
+    margin-top: auto; 
+    padding: 10px 20px;
+    text-align: right;
+  }
   
+  .logout-button {
+    padding: 10px 20px;
+    background-color: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-family: 'CircularStd', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  .logout-button:hover {
+    background-color: var(--tertiary);
+  }

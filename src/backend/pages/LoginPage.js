@@ -24,11 +24,13 @@ function LoginPage(/*{ onLogin }*/) { //un comment the onLogin parameter
   const handleSubmit = async (e) => {
     e.preventDefault();
     //////////////mock login - remove after test/////////////////////////////
+    // Mock login logic
     if (email === mockUser.email && password === mockUser.password) {
-      const mockToken = "mock-auth-token"; 
-      login(mockToken);
+      const mockToken = "mock-auth-token";
+      login(mockToken); 
       navigate(routes.dashboard); 
-      setError("Invalid email or password");
+    } else {
+      setError("Invalid email or password"); 
     }
     /////////////////////////////////////////////////////////////////////////
     // try {

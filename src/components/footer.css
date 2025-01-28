@@ -50,3 +50,13 @@
   margin-left: auto;
   text-align: right;
 }
+
+.footer-about-us {
+  margin-top: 20px;
+  font-family: 'CircularStd';
+  font-weight: 400;
+  font-size: 10px;
+  color: white;
+  margin-left: auto;
+  text-align: right;
+}
