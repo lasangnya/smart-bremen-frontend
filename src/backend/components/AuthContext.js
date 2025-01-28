@@ -8,7 +8,7 @@ export const AuthProvider = ({ children }) => {
   const [authData, setAuthData] = useState(() => {
     const storedToken = localStorage.getItem("authToken");
     const storedUser = localStorage.getItem("authUser");
-    return storedToken 
+    return storedToken
       ? { token: storedToken, user: JSON.parse(storedUser) }
       : null;
   });
@@ -16,6 +16,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     if (authData) {
       localStorage.setItem("authToken", authData.token);
+      console.log(authData.user);
       localStorage.setItem("authUser", JSON.stringify(authData.user));
     } else {
       localStorage.removeItem("authToken");

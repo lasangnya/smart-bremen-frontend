@@ -30,14 +30,13 @@ function LoginPage({ onLogin }) {
         "http://127.0.0.1:8082/api/auth/login",
         { email, password }
       );
-      const { token } = response.data;
-      login(token);
+      const { token, user } = response.data;
+      login(token, user);
     } catch (err) {
       setError(err.response?.data?.message || "Login failed. Try again.");
     }
     navigate(routes.dashboard);
   };
-
 
   return (
     <div className="login-page">
@@ -47,36 +46,36 @@ function LoginPage({ onLogin }) {
           <img src={logo} alt="smart-bremen-logo" />
         </div>
         <div className="login-form">
-            <form onSubmit={handleSubmit}>
-              <div className="input-group">
-                <label htmlFor="email">Email Address</label>
-                <input
-                  type="email"
-                  id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-              <div className="input-group">
-                <label htmlFor="password">Password</label>
-                <input
-                  type="password"
-                  id="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-              {error && <p className="error-message">{error}</p>}
-              <a href="/forgot-password" className="forgot-password">
-                Forgot Password?
-              </a>
-              <button type="submit" className="button">
-                Login
-              </button>
-              <a href="/signup" className="signup-link">
-                Don’t have an account? Create one here
-              </a>
-            </form>
+          <form onSubmit={handleSubmit}>
+            <div className="input-group">
+              <label htmlFor="email">Email Address</label>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="input-group">
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            {error && <p className="error-message">{error}</p>}
+            <a href="/forgot-password" className="forgot-password">
+              Forgot Password?
+            </a>
+            <button type="submit" className="button">
+              Login
+            </button>
+            <a href="/signup" className="signup-link">
+              Don’t have an account? Create one here
+            </a>
+          </form>
         </div>
       </div>
       <Footer />

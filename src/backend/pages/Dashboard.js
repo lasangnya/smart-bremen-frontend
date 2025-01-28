@@ -16,7 +16,7 @@ function Dashboard() {
   const [activeSection, setActiveSection] = useState("AddNewLocation");
   const location = useLocation();
   const navigate = useNavigate();
-  const { token, logout } = useAuth();
+  const { token, user, logout } = useAuth();
   const { markerPosition } = location.state || {}; // Access the state data
 
   const handleLogout = async () => {
