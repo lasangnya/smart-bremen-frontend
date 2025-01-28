@@ -306,7 +306,7 @@ const SmartBremenMap = () => {
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8082/api/posts", {
+      .get("http://127.0.0.1:8082/api/dashboard/posts", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -453,7 +453,7 @@ const SmartBremenMap = () => {
               <Marker
                 icon={icon}
                 key={post.id}
-                position={[longitude, latitude]}
+                position={[latitude, longitude]}
               >
                 <Popup>
                   <strong>{post.title}</strong>

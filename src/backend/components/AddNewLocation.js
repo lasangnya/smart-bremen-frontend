@@ -15,10 +15,10 @@ function AddNewLocation({ markerPosition }) {
   const [informalityLayers, setInformalityLayers] = useState([]);
   // const [category, setCategory] = useState("artist");
   const [longitude, setLongitude] = useState(
-    markerPosition ? markerPosition[0] : ""
+    markerPosition ? markerPosition[1] : ""
   );
   const [latitude, setLatitude] = useState(
-    markerPosition ? markerPosition[1] : ""
+    markerPosition ? markerPosition[0] : ""
   );
   const [description, setDescription] = useState("");
   const [displayPicture, setDisplayPicture] = useState(null);

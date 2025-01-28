@@ -7,10 +7,13 @@ import Header from "../components/BackHeader";
 import Footer from "../../components/Footer";
 import "./dashboard.css";
 import { useLocation } from "react-router-dom";
+import { useAuth } from "../components/AuthContext";
 import { marker } from "leaflet";
 
 function Dashboard() {
   const [activeSection, setActiveSection] = useState("AddNewLocation");
+  const { token, user } = useAuth(); // Retrieve the token from the context
+
   const location = useLocation();
   const { markerPosition } = location.state || {}; // Access the state data
 
@@ -51,24 +54,28 @@ function Dashboard() {
             >
               Edit Existing Location
             </li>
-            <li
-              className={activeSection === "UserRequests" ? "active" : ""}
-              onClick={() => setActiveSection("UserRequests")}
-            >
-              User Requests
-            </li>
-            <li
-              className={activeSection === "PostRequests" ? "active" : ""}
-              onClick={() => setActiveSection("PostRequests")}
-            >
-              Post Requests
-            </li>
-            <li
-              className={activeSection === "Users" ? "active" : ""}
-              onClick={() => setActiveSection("Users")}
-            >
-              Users
-            </li>
+            {user.role_id === 1 && (
+              <>
+                <li
+                  className={activeSection === "UserRequests" ? "active" : ""}
+                  onClick={() => setActiveSection("UserRequests")}
+                >
+                  User Requests
+                </li>
+                <li
+                  className={activeSection === "PostRequests" ? "active" : ""}
+                  onClick={() => setActiveSection("PostRequests")}
+                >
+                  Post Requests
+                </li>
+                <li
+                  className={activeSection === "Users" ? "active" : ""}
+                  onClick={() => setActiveSection("Users")}
+                >
+                  Users
+                </li>
+              </>
+            )}
           </ul>
         </nav>
         <main className="content">{renderSection()}</main>
