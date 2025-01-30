@@ -1,88 +1,97 @@
 .featured-container {
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: linear-gradient(0deg, var(--accent), #fff);
-    color: white;
-  }
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* min-height: 100vh; */
+  padding-top: 100px;
+  background: linear-gradient(0deg, var(--accent), #fff);
+  color: white;
+}
 
-  .artist-info{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin-top: 150px;
-    margin-left: 50px;
-    margin-right: 20px;
-    width: 80%;
-    height: auto;
-  }
+.post-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 150px;
+  margin-left: 50px;
+  margin-right: 20px;
+  width: 80%;
+  height: auto;
+}
 
-  .artist-description{
-    font-family: 'ClashDisplay';
-    font-size: 20px;
-    font-weight: 700;
-    margin-right: 5px;
-    color: var(--tertiary);
-  }
+.post-title {
+  font-family: "ClashDisplay";
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: var(--tertiary);
+}
 
-  .text-container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px;
-  }
+.post-content {
+  font-family: "ClashDisplay";
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--on-primary);
+  text-align: justify;
+}
 
-  .text-we-are-bremen {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-  }
-  
-  .text-we-are {
-    font-family: 'ClashDisplay';
-    font-size: 25px;
-    font-weight: 300;
-    margin-right: 5px;
-    color: var(--on-primary);
-  }
-  
-  .text-bremen {
-    font-family: 'ClashDisplay';
-    font-weight: 700;
-    font-size: 25px;
-    color: var(--on-primary);
-  }
-  
-  .text-with-icon {
-    display: flex;
-    align-items: center;
-  }
-  
-  .icon {
-    margin-left: 5px;
-    height: 17px;
-  }
+.text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
 
-  .text-featured {
-    font-family: 'ClashDisplay';
-    font-size: 60px;
-    font-weight: 700;
-    margin-top: 2px;
-    color: var(--accent);
-  }
+.text-we-are-bremen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
 
-  .slide {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    animation: slideIn 1s ease-in-out forwards;
+.text-we-are {
+  font-family: "ClashDisplay";
+  font-size: 25px;
+  font-weight: 300;
+  margin-right: 5px;
+  color: var(--on-primary);
+}
+
+.text-bremen {
+  font-family: "ClashDisplay";
+  font-weight: 700;
+  font-size: 25px;
+  color: var(--on-primary);
+}
+
+.text-with-icon {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  margin-left: 5px;
+  height: 17px;
+}
+
+.text-featured {
+  font-family: "ClashDisplay";
+  font-size: 60px;
+  font-weight: 700;
+  margin-top: 2px;
+  color: var(--accent);
+}
+
+.slide {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: slideIn 1s ease-in-out forwards;
 }
 
 .pictures-container {
@@ -93,7 +102,7 @@
 
 .picture {
   width: 200px;
-  height: 150px;
+  height: 200px;
   margin-left: 30px;
   border-radius: 10px;
   flex-shrink: 0;
@@ -110,7 +119,7 @@
 }
 
 .arrow {
-  position: absolute; 
+  position: absolute;
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
@@ -124,4 +133,8 @@
 
 .right-arrow {
   right: 10px;
+}
+
+.button-container {
+  margin-top: 30px;
 }

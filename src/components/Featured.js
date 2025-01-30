@@ -1,32 +1,45 @@
-import React, { useEffect, useState } from 'react';
-import SmartBremenLines from '../assets/icons/smart_bremen_lines.svg';
-import featuredData from '../data/featuredData';
-import './featured.css';
-import ArtistProfileandName from './ArtistProfileandName';
-import Button from './Button';
+import React, { useEffect, useState } from "react";
+import SmartBremenLines from "../assets/icons/smart_bremen_lines.svg";
+import "./featured.css";
+import Button from "./Button";
+import axios from "axios";
 
 const Featured = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    // Fetch posts from API
+    const fetchPosts = async () => {
+      const response = await axios.get(
+        "http://127.0.0.1:8082/api/posts/featured/?limit=3"
+      ); // Adjust to your API endpoint
+      const data = await response.data;
+      console.log(data);
+      setPosts(data);
+    };
+
+    fetchPosts();
+  }, []);
 
   const handlePrevClick = () => {
-    setCurrentSlide((prevSlide) => (prevSlide === 0 ? featuredData.length - 1 : prevSlide - 1));
+    setCurrentSlide((prevSlide) =>
+      prevSlide === 0 ? posts.length - 1 : prevSlide - 1
+    );
   };
 
   const handleNextClick = () => {
-    setCurrentSlide((prevSlide) => (prevSlide === featuredData.length - 1 ? 0 : prevSlide + 1));
+    setCurrentSlide((prevSlide) =>
+      prevSlide === posts.length - 1 ? 0 : prevSlide + 1
+    );
   };
 
-  const { artist } = featuredData[currentSlide];
+  if (posts.length === 0) return <div>Loading...</div>;
 
-  // Dynamically duplicate pictures for endless scrolling
-  const duplicatedPictures = [...artist.pictures, ...artist.pictures, ...artist.pictures];
+  const { title, content, images } = posts[currentSlide];
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      handleNextClick();
-    }, 10000);
-    return () => clearInterval(interval);
-  }, [currentSlide]);
+  // Dynamically duplicate images for endless scrolling
+  const duplicatedImages = [...images, ...images, ...images];
 
   return (
     <div className="featured-container">
@@ -42,18 +55,18 @@ const Featured = () => {
       </div>
       <div className="slide">
         <div className="pictures-container">
-          {duplicatedPictures.map((picture, index) => (
+          {duplicatedImages.map((image, index) => (
             <img
               key={index}
-              src={picture}
-              alt={`Artist ${artist.name} picture ${index}`}
+              src={image.full_url}
+              alt={`Post ${title} image ${index}`}
               className="picture"
             />
           ))}
         </div>
-        <div className="artist-info">
-          <div className="artist-description">{artist.description}</div>
-          <ArtistProfileandName artist={artist} className="artist-profile-name" />
+        <div className="post-info">
+          <div className="post-title">{title}</div>
+          <div className="post-content">{content}</div>
         </div>
       </div>
       <div className="arrow left-arrow" onClick={handlePrevClick}>
@@ -62,9 +75,9 @@ const Featured = () => {
       <div className="arrow right-arrow" onClick={handleNextClick}>
         &#9654;
       </div>
-      <div className="button-container">
+      {/* <div className="button-container">
         <Button text="SEE MORE" onClick={() => {}} />
-      </div>
+      </div> */}
     </div>
   );
 };
