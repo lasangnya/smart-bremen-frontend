@@ -38,7 +38,7 @@ const App = () => {
           <SmartBremenMap />
         </div>
       </div>
-      <Featured />
+      {/* <Featured /> */}
       <div className="app-content"></div>
       <div
         style={{

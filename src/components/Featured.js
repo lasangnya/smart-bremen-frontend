@@ -39,7 +39,6 @@ const Featured = () => {
 
   const { title, content, images } = posts[currentSlide];
 
-  // Dynamically duplicate images for endless scrolling
   const duplicatedImages = [...images, ...images, ...images];
 
   return (
