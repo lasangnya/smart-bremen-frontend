@@ -10,7 +10,7 @@ function PostRequests() {
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8082/api/dashboard/posts", {
+      .get("http://134.102.23.131:8082/api/dashboard/posts", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -28,7 +28,7 @@ function PostRequests() {
 
   const handleDelete = (id) => {
     axios
-      .delete(`http://127.0.0.1:8082/api/posts/${id}`, {
+      .delete(`http://134.102.23.131:8082/api/posts/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then(() =>
@@ -42,7 +42,7 @@ function PostRequests() {
   const handlePublish = (id) => {
     axios
       .post(
-        `http://127.0.0.1:8082/api/admin/posts/${id}/toggle-publish`,
+        `http://134.102.23.131:8082/api/admin/posts/${id}/toggle-publish`,
         {},
         {
           headers: { Authorization: `Bearer ${token}` },

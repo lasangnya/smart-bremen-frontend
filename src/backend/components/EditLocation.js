@@ -49,7 +49,7 @@ function EditLocation() {
   useEffect(() => {
     console.log(post.images.map((image) => image));
     axios
-      .get("http://127.0.0.1:8082/api/informality-layers")
+      .get("http://134.102.23.131:8082/api/informality-layers")
       .then((res) => setInformalityLayers(res.data))
       .catch((err) => console.error("Error fetching informality layers:", err));
   }, []);
@@ -105,7 +105,7 @@ function EditLocation() {
     useEffect(() => {
       console.log(post.images.map((image) => image));
       axios
-        .get("http://127.0.0.1:8082/api/informality-layers")
+        .get("http://134.102.23.131:8082/api/informality-layers")
         .then((res) => setInformalityLayers(res.data))
         .catch((err) =>
           console.error("Error fetching informality layers:", err)
@@ -176,7 +176,7 @@ function EditLocation() {
 
       try {
         const res = await axios.put(
-          `http://127.0.0.1:8082/api/posts/${post.id}`,
+          `http://134.102.23.131:8082/api/posts/${post.id}`,
           formData,
           {
             headers: {
@@ -489,7 +489,7 @@ function EditLocation() {
     useEffect(() => {
       console.log(post.images.map((image) => image));
       axios
-        .get("http://127.0.0.1:8082/api/informality-layers")
+        .get("http://134.102.23.131:8082/api/informality-layers")
         .then((res) => setInformalityLayers(res.data))
         .catch((err) =>
           console.error("Error fetching informality layers:", err)
@@ -560,7 +560,7 @@ function EditLocation() {
 
       try {
         const res = await axios.put(
-          `http://127.0.0.1:8082/api/posts/${post.id}`,
+          `http://134.102.23.131:8082/api/posts/${post.id}`,
           formData,
           {
             headers: {
@@ -885,7 +885,7 @@ function EditLocation() {
 
     try {
       const res = await axios.put(
-        `http://127.0.0.1:8082/api/posts/${post.id}`,
+        `http://134.102.23.131:8082/api/posts/${post.id}`,
         formData,
         {
           headers: {

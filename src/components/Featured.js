@@ -12,7 +12,7 @@ const Featured = () => {
     // Fetch posts from API
     const fetchPosts = async () => {
       const response = await axios.get(
-        "http://127.0.0.1:8082/api/posts/featured/?limit=3"
+        "http://134.102.23.131:8082/api/posts/featured/?limit=3"
       ); // Adjust to your API endpoint
       const data = await response.data;
       console.log(data);

@@ -21,7 +21,7 @@ function SignupPage() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8082/api/create-user",
+        "http://134.102.23.131:8082/api/create-user",
         { name, email, password }
       );
       console.log(response);

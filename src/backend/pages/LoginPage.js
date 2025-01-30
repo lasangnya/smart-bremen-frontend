@@ -27,7 +27,7 @@ function LoginPage({ onLogin }) {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8082/api/auth/login",
+        "http://134.102.23.131:8082/api/auth/login",
         { email, password }
       );
       const { token, user } = response.data;
@@ -35,7 +35,7 @@ function LoginPage({ onLogin }) {
     } catch (err) {
       setError(err.response?.data?.message || "Login failed. Try again.");
     }
-    navigate(routes.dashboard);
+    navigate(routes.home);
   };
 
   return (

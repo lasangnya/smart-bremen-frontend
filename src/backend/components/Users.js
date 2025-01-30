@@ -8,7 +8,7 @@ function Users() {
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8082/api/users")
+      .get("http://134.102.23.131:8082/api/users")
       .then((response) => setUsers(response.data))
       .catch((error) => console.error("Error fetching users:", error));
   }, []);
@@ -31,7 +31,7 @@ function Users() {
     try {
       const updatedUser = { ...user, role_id: Number(user.role_id) }; // Ensure role_id is a number
       await axios.put(
-        `http://127.0.0.1:8082/api/users/${user.id}`,
+        `http://134.102.23.131:8082/api/users/${user.id}`,
         updatedUser
       );
       // alert("User updated successfully!");
@@ -44,7 +44,7 @@ function Users() {
     if (!window.confirm("Are you sure you want to delete this user?")) return;
 
     try {
-      await axios.delete(`http://127.0.0.1:8082/api/users/${id}`);
+      await axios.delete(`http://134.102.23.131:8082/api/users/${id}`);
       setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
       // alert("User deleted successfully!");
     } catch (error) {

@@ -29,7 +29,7 @@ function AddNewLocation({ markerPosition, post }) {
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8082/api/informality-layers")
+      .get("http://134.102.23.131:8082/api/informality-layers")
       .then((res) => setInformalityLayers(res.data))
       .catch((err) => console.error("Error fetching informality layers:", err));
   }, []);
@@ -60,7 +60,7 @@ function AddNewLocation({ markerPosition, post }) {
       let res;
       if (post) {
         res = await axios.PUT(
-          `http://127.0.0.1:8082/api/posts/${post.id}`,
+          `http://134.102.23.131:8082/api/posts/${post.id}`,
           formData,
           {
             headers: {
@@ -70,12 +70,16 @@ function AddNewLocation({ markerPosition, post }) {
           }
         );
       } else {
-        res = await axios.post("http://127.0.0.1:8082/api/posts", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        res = await axios.post(
+          "http://134.102.23.131:8082/api/posts",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
       }
       console.log("Post created:", res.data);
       navigate(routes.home);

@@ -30,7 +30,7 @@ const Header = () => {
       const authToken = localStorage.getItem("authToken");
       if (authToken) {
         await axios.post(
-          "http://127.0.0.1:8082/api/auth/logout",
+          "http://134.102.23.131:8082/api/auth/logout",
           {},
           { headers: { Authorization: `Bearer ${authToken}` } }
         );
@@ -43,7 +43,7 @@ const Header = () => {
   };
 
   return (
-    <header className="header">      
+    <header className="header">
       <div
         className="header-section logo"
         onClick={() => handleNavigation(routes.home)}

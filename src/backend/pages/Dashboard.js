@@ -35,7 +35,7 @@ function Dashboard() {
       const authToken = localStorage.getItem("authToken");
       if (authToken) {
         await axios.post(
-          "http://127.0.0.1:8082/api/auth/logout",
+          "http://134.102.23.131:8082/api/auth/logout",
           {},
           { headers: { Authorization: `Bearer ${authToken}` } }
         );
@@ -54,8 +54,8 @@ function Dashboard() {
         return <AddNewLocation markerPosition={markerPosition} post={null} />;
       case "EditExistingLocation":
         return <EditLocation post={post} />;
-      case "UserRequests":
-        return <UserRequests />;
+      // case "UserRequests":
+      //   return <UserRequests />;
       case "PostRequests":
         return <PostRequests />;
       case "Users":
@@ -92,12 +92,12 @@ function Dashboard() {
             </li> */}
             {user?.role_id === 1 && (
               <>
-                <li
+                {/* <li
                   className={activeSection === "UserRequests" ? "active" : ""}
                   onClick={() => setActiveSection("UserRequests")}
                 >
                   User Requests
-                </li>
+                </li> */}
                 <li
                   className={activeSection === "PostRequests" ? "active" : ""}
                   onClick={() => setActiveSection("PostRequests")}

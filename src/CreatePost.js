@@ -21,7 +21,7 @@ const CreatePost = ({ latitude, longitude }) => {
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8082/api/informality-layers")
+      .get("http://134.102.23.131:8082/api/informality-layers")
       .then((res) => setInformalityLayers(res.data))
       .catch((err) => console.error("Error fetching informality layers:", err));
   }, []);
@@ -53,7 +53,7 @@ const CreatePost = ({ latitude, longitude }) => {
     galleryImages.forEach((img, i) => formData.append("gallery_images[]", img));
     try {
       const res = await axios.post(
-        "http://127.0.0.1:8082/api/posts",
+        "http://134.102.23.131:8082/api/posts",
         formData,
         {
           headers: {

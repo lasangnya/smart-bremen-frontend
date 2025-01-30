@@ -304,7 +304,7 @@ const SmartBremenMap = () => {
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8082/api/posts", {
+      .get("http://134.102.23.131:8082/api/posts", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -329,7 +329,7 @@ const SmartBremenMap = () => {
   const togglePublish = (post) => {
     axios
       .post(
-        `http://127.0.0.1:8082/api/admin/posts/${post.id}/toggle-publish`,
+        `http://134.102.23.131:8082/api/admin/posts/${post.id}/toggle-publish`,
         {},
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -337,7 +337,7 @@ const SmartBremenMap = () => {
       )
       .then(() => {
         axios
-          .get("http://127.0.0.1:8082/api/posts", {
+          .get("http://134.102.23.131:8082/api/posts", {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -357,12 +357,12 @@ const SmartBremenMap = () => {
 
   const deletePost = (post) => {
     axios
-      .delete(`http://127.0.0.1:8082/api/posts/${post.id}`, {
+      .delete(`http://134.102.23.131:8082/api/posts/${post.id}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then(() => {
         axios
-          .get("http://127.0.0.1:8082/api/posts", {
+          .get("http://134.102.23.131:8082/api/posts", {
             headers: {
               Authorization: `Bearer ${token}`,
             },
