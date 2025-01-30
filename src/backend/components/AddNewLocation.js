@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import { useAuth } from "./AuthContext";
 import "./addnewlocation.css"; // Import the CSS file
 import routes from "../../routes";
+import { API_BASE_URL } from "../../routes";
 
 function AddNewLocation({ markerPosition, post }) {
   const [title, setTitle] = useState(post ? post.title : "");
@@ -29,7 +30,7 @@ function AddNewLocation({ markerPosition, post }) {
 
   useEffect(() => {
     axios
-      .get("http://134.102.23.131:8082/api/informality-layers")
+      .get(`${API_BASE_URL}/api/informality-layers`)
       .then((res) => setInformalityLayers(res.data))
       .catch((err) => console.error("Error fetching informality layers:", err));
   }, []);
@@ -60,7 +61,7 @@ function AddNewLocation({ markerPosition, post }) {
       let res;
       if (post) {
         res = await axios.PUT(
-          `http://134.102.23.131:8082/api/posts/${post.id}`,
+          `${API_BASE_URL}/api/posts/${post.id}`,
           formData,
           {
             headers: {
@@ -70,16 +71,12 @@ function AddNewLocation({ markerPosition, post }) {
           }
         );
       } else {
-        res = await axios.post(
-          "http://134.102.23.131:8082/api/posts",
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        res = await axios.post(`${API_BASE_URL}/api/posts`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
+          },
+        });
       }
       console.log("Post created:", res.data);
       navigate(routes.home);

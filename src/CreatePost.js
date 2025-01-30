@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./CreatePost.css";
 import { useAuth } from "./backend/components/AuthContext";
-
+import { API_BASE_URL } from "./routes";
 const CreatePost = ({ latitude, longitude }) => {
   const { token } = useAuth(); // Retrieve the token from the context
   const [title, setTitle] = useState("");
@@ -21,7 +21,7 @@ const CreatePost = ({ latitude, longitude }) => {
 
   useEffect(() => {
     axios
-      .get("http://134.102.23.131:8082/api/informality-layers")
+      .get(`${API_BASE_URL}/api/informality-layers`)
       .then((res) => setInformalityLayers(res.data))
       .catch((err) => console.error("Error fetching informality layers:", err));
   }, []);
@@ -52,16 +52,12 @@ const CreatePost = ({ latitude, longitude }) => {
     if (displayImage) formData.append("display_image", displayImage);
     galleryImages.forEach((img, i) => formData.append("gallery_images[]", img));
     try {
-      const res = await axios.post(
-        "http://134.102.23.131:8082/api/posts",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const res = await axios.post(`${API_BASE_URL}/api/posts`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+      });
       console.log("Post created:", res.data);
       alert("Post created successfully!");
       setTitle("");
