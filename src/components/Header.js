@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { API_BASE_URL } from "../routes";
 
 import { useNavigate } from "react-router-dom";
 import "./header.css";
@@ -30,7 +31,7 @@ const Header = () => {
       const authToken = localStorage.getItem("authToken");
       if (authToken) {
         await axios.post(
-          "http://134.102.23.131:8082/api/auth/logout",
+          `${API_BASE_URL}/api/auth/logout`,
           {},
           { headers: { Authorization: `Bearer ${authToken}` } }
         );

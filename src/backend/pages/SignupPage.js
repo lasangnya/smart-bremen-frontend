@@ -6,6 +6,7 @@ import Footer from "../../components/Footer";
 import logo from "../../assets/logos/logo_smart_bremen.svg";
 import "./signuppage.css";
 import routes from "../../routes";
+import { API_BASE_URL } from "../../routes";
 
 function SignupPage() {
   const [name, setName] = useState("");
@@ -20,10 +21,11 @@ function SignupPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "http://134.102.23.131:8082/api/create-user",
-        { name, email, password }
-      );
+      const response = await axios.post(`${API_BASE_URL}/api/create-user`, {
+        name,
+        email,
+        password,
+      });
       console.log(response);
       // const { token, user } = response.data;
       // login(token, user);

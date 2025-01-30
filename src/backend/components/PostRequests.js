@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./postrequests.css";
 import { useAuth } from "./AuthContext";
+import { API_BASE_URL } from "../../routes";
 
 function PostRequests() {
   const [postRequests, setPostRequests] = useState([]);
@@ -10,7 +11,7 @@ function PostRequests() {
 
   useEffect(() => {
     axios
-      .get("http://134.102.23.131:8082/api/dashboard/posts", {
+      .get(`${API_BASE_URL}/api/dashboard/posts`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -28,7 +29,7 @@ function PostRequests() {
 
   const handleDelete = (id) => {
     axios
-      .delete(`http://134.102.23.131:8082/api/posts/${id}`, {
+      .delete(`${API_BASE_URL}/api/posts/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then(() =>
@@ -42,7 +43,7 @@ function PostRequests() {
   const handlePublish = (id) => {
     axios
       .post(
-        `http://134.102.23.131:8082/api/admin/posts/${id}/toggle-publish`,
+        `${API_BASE_URL}/api/admin/posts/${id}/toggle-publish`,
         {},
         {
           headers: { Authorization: `Bearer ${token}` },

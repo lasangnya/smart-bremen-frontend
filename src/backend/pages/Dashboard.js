@@ -11,6 +11,7 @@ import "./dashboard.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../components/AuthContext";
 import routes from "../../routes";
+import { API_BASE_URL } from "../../routes";
 import { marker } from "leaflet";
 
 function Dashboard() {
@@ -35,7 +36,7 @@ function Dashboard() {
       const authToken = localStorage.getItem("authToken");
       if (authToken) {
         await axios.post(
-          "http://134.102.23.131:8082/api/auth/logout",
+          `${API_BASE_URL}/api/auth/logout`,
           {},
           { headers: { Authorization: `Bearer ${authToken}` } }
         );

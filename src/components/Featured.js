@@ -3,6 +3,7 @@ import SmartBremenLines from "../assets/icons/smart_bremen_lines.svg";
 import "./featured.css";
 import Button from "./Button";
 import axios from "axios";
+import { API_BASE_URL } from "../routes";
 
 const Featured = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -12,7 +13,7 @@ const Featured = () => {
     // Fetch posts from API
     const fetchPosts = async () => {
       const response = await axios.get(
-        "http://134.102.23.131:8082/api/posts/featured/?limit=3"
+        `${API_BASE_URL}/api/posts/featured/?limit=5`
       ); // Adjust to your API endpoint
       const data = await response.data;
       console.log(data);

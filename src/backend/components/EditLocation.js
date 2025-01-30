@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import { useAuth } from "./AuthContext";
 import "./addnewlocation.css"; // Import the CSS file
 import routes from "../../routes";
+import { API_BASE_URL } from "../../routes";
 
 import { useLocation } from "react-router-dom";
 function EditLocation() {
@@ -49,7 +50,7 @@ function EditLocation() {
   useEffect(() => {
     console.log(post.images.map((image) => image));
     axios
-      .get("http://134.102.23.131:8082/api/informality-layers")
+      .get(`${API_BASE_URL}/api/informality-layers`)
       .then((res) => setInformalityLayers(res.data))
       .catch((err) => console.error("Error fetching informality layers:", err));
   }, []);
@@ -105,7 +106,7 @@ function EditLocation() {
     useEffect(() => {
       console.log(post.images.map((image) => image));
       axios
-        .get("http://134.102.23.131:8082/api/informality-layers")
+        .get(`${API_BASE_URL}/api/informality-layers`)
         .then((res) => setInformalityLayers(res.data))
         .catch((err) =>
           console.error("Error fetching informality layers:", err)
@@ -176,7 +177,7 @@ function EditLocation() {
 
       try {
         const res = await axios.put(
-          `http://134.102.23.131:8082/api/posts/${post.id}`,
+          `${API_BASE_URL}/api/posts/${post.id}`,
           formData,
           {
             headers: {
@@ -489,7 +490,7 @@ function EditLocation() {
     useEffect(() => {
       console.log(post.images.map((image) => image));
       axios
-        .get("http://134.102.23.131:8082/api/informality-layers")
+        .get(`${API_BASE_URL}/api/informality-layers`)
         .then((res) => setInformalityLayers(res.data))
         .catch((err) =>
           console.error("Error fetching informality layers:", err)
@@ -560,7 +561,7 @@ function EditLocation() {
 
       try {
         const res = await axios.put(
-          `http://134.102.23.131:8082/api/posts/${post.id}`,
+          `${API_BASE_URL}/api/posts/${post.id}`,
           formData,
           {
             headers: {
@@ -885,7 +886,7 @@ function EditLocation() {
 
     try {
       const res = await axios.put(
-        `http://134.102.23.131:8082/api/posts/${post.id}`,
+        `${API_BASE_URL}/api/posts/${post.id}`,
         formData,
         {
           headers: {

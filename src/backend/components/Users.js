@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./users.css";
+import { API_BASE_URL } from "../../routes";
 
 function Users() {
   const [users, setUsers] = useState([]);
@@ -8,7 +9,7 @@ function Users() {
 
   useEffect(() => {
     axios
-      .get("http://134.102.23.131:8082/api/users")
+      .get(`${API_BASE_URL}/api/users`)
       .then((response) => setUsers(response.data))
       .catch((error) => console.error("Error fetching users:", error));
   }, []);
@@ -30,10 +31,7 @@ function Users() {
   const handleSave = async (user) => {
     try {
       const updatedUser = { ...user, role_id: Number(user.role_id) }; // Ensure role_id is a number
-      await axios.put(
-        `http://134.102.23.131:8082/api/users/${user.id}`,
-        updatedUser
-      );
+      await axios.put(`${API_BASE_URL}/api/users/${user.id}`, updatedUser);
       // alert("User updated successfully!");
     } catch (error) {
       console.error("Error updating user:", error);
@@ -44,7 +42,7 @@ function Users() {
     if (!window.confirm("Are you sure you want to delete this user?")) return;
 
     try {
-      await axios.delete(`http://134.102.23.131:8082/api/users/${id}`);
+      await axios.delete(`${API_BASE_URL}/api/users/${id}`);
       setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
       // alert("User deleted successfully!");
     } catch (error) {

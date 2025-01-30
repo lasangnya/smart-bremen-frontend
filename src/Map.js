@@ -265,6 +265,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
+import { API_BASE_URL } from "./routes";
 
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -283,7 +284,7 @@ const SmartBremenMap = () => {
 
   useEffect(() => {
     axios
-      .get("http://134.102.23.131:8082/api/posts", {
+      .get(`${API_BASE_URL}/api/posts`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -308,7 +309,7 @@ const SmartBremenMap = () => {
   const togglePublish = (post) => {
     axios
       .post(
-        `http://134.102.23.131:8082/api/admin/posts/${post.id}/toggle-publish`,
+        `${API_BASE_URL}/api/admin/posts/${post.id}/toggle-publish`,
         {},
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -316,7 +317,7 @@ const SmartBremenMap = () => {
       )
       .then(() => {
         axios
-          .get("http://134.102.23.131:8082/api/posts", {
+          .get(`${API_BASE_URL}/api/posts`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -336,12 +337,12 @@ const SmartBremenMap = () => {
 
   const deletePost = (post) => {
     axios
-      .delete(`http://134.102.23.131:8082/api/posts/${post.id}`, {
+      .delete(`${API_BASE_URL}/api/posts/${post.id}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then(() => {
         axios
-          .get("http://134.102.23.131:8082/api/posts", {
+          .get(`${API_BASE_URL}/api/posts`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },

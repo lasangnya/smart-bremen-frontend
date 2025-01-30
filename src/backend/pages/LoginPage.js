@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth } from "../components/AuthContext"; // Import the context
+import { API_BASE_URL } from "../../routes";
 
 import { useNavigate } from "react-router-dom";
 import Header from "../components/BackHeader";
@@ -26,10 +27,10 @@ function LoginPage({ onLogin }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "http://134.102.23.131:8082/api/auth/login",
-        { email, password }
-      );
+      const response = await axios.post(`${API_BASE_URL}/api/auth/login`, {
+        email,
+        password,
+      });
       const { token, user } = response.data;
       login(token, user);
     } catch (err) {

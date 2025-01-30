@@ -17,3 +17,5 @@ const routes = {
 };
 
 export default routes;
+
+export const API_BASE_URL = "https://smart-bremen.com";
