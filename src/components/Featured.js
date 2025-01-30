@@ -13,7 +13,7 @@ const Featured = () => {
     // Fetch posts from API
     const fetchPosts = async () => {
       const response = await axios.get(
-        `${API_BASE_URL}/api/posts/featured/?limit=5`
+        `${API_BASE_URL}/api/posts/featured/?limit=3`
       ); // Adjust to your API endpoint
       const data = await response.data;
       console.log(data);
