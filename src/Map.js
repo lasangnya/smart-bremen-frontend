@@ -300,8 +300,6 @@ import routes from "./routes";
 const SmartBremenMap = () => {
   const [posts, setPosts] = useState("");
   const { token, user } = useAuth();
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -313,15 +311,38 @@ const SmartBremenMap = () => {
       })
       .then((res) => {
         setPosts(res.data || []);
-        setLoading(false);
       })
       .catch((err) => {
         console.error("Error fetching posts:", err);
-        setError("Failed to load posts.");
-        setLoading(false);
       });
   }, []);
 
+  const handleMarkerClick = (post) => {
+    console.log(post.published);
+    console.log("Marker clicked:", post.title); // Debug: Log the clicked marker's data
+    setPostPopup(post);
+    setPopupData({
+      visible: false,
+    });
+    setMarkerPosition(null);
+  };
+
+  const publish = (post) => {
+    axios
+      .post(
+        `http://127.0.0.1:8082/api/admin/posts/${post.id}/toggle-publish`,
+        {},
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+      .then((res) => {
+        // setPosts(res.data || []);
+      })
+      .catch((err) => {
+        console.error("Error fetching posts:", err);
+      });
+  };
   const icon = L.icon({
     iconUrl: iconSVG,
     iconSize: [38, 95],
@@ -339,6 +360,10 @@ const SmartBremenMap = () => {
     position: { lat: null, lng: null },
   });
 
+  const [postPopup, setPostPopup] = useState({
+    visible: false,
+  });
+
   const handleMapClick = (e) => {
     if (token) {
       const { lat, lng } = e.latlng;
@@ -349,8 +374,85 @@ const SmartBremenMap = () => {
         visible: true,
         position: { lat, lng },
       });
+
+      setPostPopup(null);
     }
   };
+
+  const CustomPopup = ({ post, closePopup }) => (
+    <div className="post-container">
+      <div className="popup-header">
+        <h3 style={{ fontSize: "16px", margin: "5px 0" }}>{post.title}</h3>
+      </div>
+
+      {/* img needs to be full size in width. all images are square, maybe that helps */}
+      <img
+        src={
+          post.images?.find((image) => image.image_status === "display")
+            ?.full_url
+        }
+      ></img>
+      <div
+        style={{
+          height: "30%", //?? needs to be dynamic i guess
+          "overflow-y": " auto",
+          padding: "10px",
+          "font-size": "16px",
+          "line-height": "1.5",
+          " white-space": "pre-wrap" /* Keeps text formatting */,
+        }}
+      >
+        {post.content}
+      </div>
+
+      <button
+        onClick={closePopup}
+        style={{
+          background: "#4838cc",
+          color: "white",
+          border: "none",
+          padding: "5px 10px",
+          borderRadius: "5px",
+          cursor: "pointer",
+        }}
+      >
+        Close
+      </button>
+      <button
+        onClick={() =>
+          navigate(routes.editLocation, {
+            state: {
+              post: post,
+            },
+          })
+        }
+        style={{
+          background: "#4838cc",
+          color: "white",
+          border: "none",
+          padding: "5px 10px",
+          borderRadius: "5px",
+          cursor: "pointer",
+        }}
+      >
+        Edit
+      </button>
+      <button
+        onClick={() => publish(post)}
+        style={{
+          background: "#4838cc",
+          color: "white",
+          border: "none",
+          padding: "5px 10px",
+          borderRadius: "5px",
+          cursor: "pointer",
+        }}
+      >
+        {post.published === 1 ? "Unpublish" : "Publish"}
+      </button>
+    </div>
+    // </div>
+  );
 
   const AddNewLocationPopup = () =>
     popupData.visible && (
@@ -359,28 +461,27 @@ const SmartBremenMap = () => {
           <h3>Create a new post at this location</h3>
         </div>
         <div className="popup-button-container">
-        <button
-              className="submit-button"
-              onClick={() =>
-                navigate(routes.dashboard, {
-                  state: {
-                    markerPosition: markerPosition,
-                  },
-                })
-              }
-            >
-              Create
-            </button>
-            <button
-              className="cancel-button"
-              onClick={() => setPopupData({ visible: false, position: {} })}
-            >
-              Close
-            </button>        
-            
+          <button
+            className="submit-button"
+            onClick={() =>
+              navigate(routes.dashboard, {
+                state: {
+                  markerPosition: markerPosition,
+                },
+              })
+            }
+          >
+            Create
+          </button>
+          <button
+            className="cancel-button"
+            onClick={() => setPopupData({ visible: false, position: {} })}
+          >
+            Close
+          </button>
         </div>
       </div>
-    );  
+    );
 
   const MapEvents = () => {
     const map = useMap();
@@ -393,16 +494,17 @@ const SmartBremenMap = () => {
     return null;
   };
 
-  // if (loading) return <div>Loading...</div>;
-  // if (error) return <div>{error}</div>;
-
   return (
     <div style={{ position: "relative", width: "100%", height: "80vh" }}>
       <AddNewLocationPopup />
+      {postPopup && (
+        <CustomPopup post={postPopup} closePopup={() => setPostPopup(null)} />
+      )}
       <MapContainer
         center={[53.0765, 8.80681]}
         zoom={14}
         style={{ height: "100%", width: "100%" }}
+        onMarkerClick
       >
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
@@ -420,13 +522,10 @@ const SmartBremenMap = () => {
                 icon={icon}
                 key={post.id}
                 position={[latitude, longitude]}
-              >
-                <Popup>
-                  <strong>{post.title}</strong>
-                  <br />
-                  {post.description}
-                </Popup>
-              </Marker>
+                eventHandlers={{
+                  click: () => handleMarkerClick(post),
+                }}
+              ></Marker>
             );
           }
 

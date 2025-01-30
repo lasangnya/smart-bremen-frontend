@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import AddNewLocation from "../components/AddNewLocation";
+import EditLocation from "../components/EditLocation";
 import UserRequests from "../components/UserRequests";
 import PostRequests from "../components/PostRequests";
 import Users from "../components/Users";
@@ -13,11 +14,15 @@ import routes from "../../routes";
 import { marker } from "leaflet";
 
 function Dashboard() {
-  const [activeSection, setActiveSection] = useState("AddNewLocation");
+  // const [activeSection, setActiveSection] = useState("AddNewLocation");
   const location = useLocation();
   const navigate = useNavigate();
   const { token, user, logout } = useAuth();
   const { markerPosition } = location.state || {}; // Access the state data
+  const { post } = location.state || {};
+  const [activeSection, setActiveSection] = useState(
+    location.state?.post ? "EditExistingLocation" : "AddNewLocation"
+  );
 
   const handleLogout = async () => {
     try {
@@ -30,6 +35,7 @@ function Dashboard() {
         );
       }
       logout();
+      navigate(routes.loginPage);
     } catch (err) {
       console.error("Logout error:", err.response?.data || err.message);
     }
@@ -37,11 +43,12 @@ function Dashboard() {
   };
 
   const renderSection = () => {
+    console.log(post);
     switch (activeSection) {
       case "AddNewLocation":
-        return <AddNewLocation markerPosition={markerPosition} />;
+        return <AddNewLocation markerPosition={markerPosition} post={null} />;
       case "EditExistingLocation":
-        return <div>Edit Existing Location</div>;
+        return <EditLocation post={post} />;
       case "UserRequests":
         return <UserRequests />;
       case "PostRequests":
@@ -97,7 +104,7 @@ function Dashboard() {
             )}
           </ul>
           <div className="logout-button-container">
-            <p className="token-text">You are logged in with token: {token}</p>
+            {/* <p className="token-text">You are logged in with token: {token}</p> */}
             <button className="logout-button" onClick={handleLogout}>
               Logout
             </button>

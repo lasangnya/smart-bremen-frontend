@@ -4,7 +4,7 @@ import LoginPage from "./backend/pages/LoginPage";
 import Dashboard from "./backend/pages/Dashboard";
 import SignupPage from "./backend/pages/SignupPage";
 import AddNewLocation from "./backend/components/AddNewLocation";
-
+import EditLocation from "./backend/components/EditLocation";
 const routes = {
   home: "/",
   contactUs: "/contactus",
@@ -13,6 +13,7 @@ const routes = {
   dashboard: "/dashboard",
   signupPage: "/signup",
   addNewLocation: "/addNewLocation",
+  editLocation: "/editLocation",
 };
 
 export default routes;

@@ -1,232 +1,155 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import postRequestsData from "../data/postRequests.json";
 import "./postrequests.css";
+import { useAuth } from "./AuthContext";
 
 function PostRequests() {
   const [postRequests, setPostRequests] = useState(postRequestsData);
   const [expandedRow, setExpandedRow] = useState(null);
+  const { token } = useAuth();
+
+  useEffect(() => {
+    axios
+      .get("http://127.0.0.1:8082/api/dashboard/posts", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        const unpublishedPosts = response.data.data.filter(
+          (post) => !post.published
+        );
+        setPostRequests(unpublishedPosts);
+      })
+      .catch((error) => console.error("Error fetching post requests:", error));
+  }, [token]);
 
   const handleReview = (id) => {
     setExpandedRow(expandedRow === id ? null : id);
   };
 
-  const handleInputChange = (id, field, value) => {
-    setPostRequests((prevRequests) =>
-      prevRequests.map((post) =>
-        post.id === id ? { ...post, [field]: value } : post
+  const handleDelete = (id) => {
+    axios
+      .delete(`http://127.0.0.1:8082/api/posts/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then(() =>
+        setPostRequests((prevRequests) =>
+          prevRequests.filter((post) => post.id !== id)
+        )
       )
-    );
+      .catch((error) => console.error("Error deleting post:", error));
   };
 
-  const handleLocationChange = (id, field, value) => {
-    setPostRequests((prevRequests) =>
-      prevRequests.map((post) =>
-        post.id === id
-          ? { ...post, location: { ...post.location, [field]: value } }
-          : post
+  const handlePublish = (id) => {
+    axios
+      .post(
+        `http://127.0.0.1:8082/api/admin/posts/${id}/toggle-publish`,
+        {},
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
       )
-    );
-  };
-
-  const handleDisplayPictureChange = (id, file) => {
-    setPostRequests((prevRequests) =>
-      prevRequests.map((post) =>
-        post.id === id ? { ...post, displayPicture: URL.createObjectURL(file) } : post
-      )
-    );
-  };
-
-  const handleGalleryChange = (id, files) => {
-    setPostRequests((prevRequests) =>
-      prevRequests.map((post) =>
-        post.id === id
-          ? {
-              ...post,
-              gallery: [...post.gallery, ...Array.from(files).map((file) => URL.createObjectURL(file))],
-            }
-          : post
-      )
-    );
-  };
-
-  const handleRemoveGalleryImage = (id, index) => {
-    setPostRequests((prevRequests) =>
-      prevRequests.map((post) =>
-        post.id === id
-          ? { ...post, gallery: post.gallery.filter((_, i) => i !== index) }
-          : post
-      )
-    );
-  };
-
-  const handleRemoveDisplayPicture = (id) => {
-    setPostRequests((prevRequests) =>
-      prevRequests.map((post) =>
-        post.id === id ? { ...post, displayPicture: null } : post
-      )
-    );
+      .then(() => {
+        setPostRequests((prevRequests) =>
+          prevRequests.filter((post) => post.id !== id)
+        );
+        console.log("Post published");
+      })
+      .catch((error) => console.error("Error publishing post:", error));
   };
 
   return (
     <div className="post-requests">
-      {postRequests.map((post) =>
-        expandedRow === post.id ? (
-          <div key={post.id} className="row-details">
-            <div className="details-header">
-              <a href="#" className="remove-link">
-                Remove
-              </a>
-              <button className="approve-button">Approve</button>
-            </div>
-            <div>
-              <strong>Name:</strong>
-              <input
-                type="text"
-                value={post.name}
-                onChange={(e) =>
-                  handleInputChange(post.id, "name", e.target.value)
-                }
-              />
-            </div>
-            <div>
-              <strong>Category:</strong>
-              <span>{post.category}</span>
-            </div>
-            <div className="location">
-              <strong>Location:</strong>
-              <div>
-                <span>
-                  Latitude:{" "}
-                  <input
-                    type="text"
-                    value={post.location.latitude}
-                    onChange={(e) =>
-                      handleLocationChange(post.id, "latitude", e.target.value)
-                    }
-                  />
-                </span>
-                <span>
-                  Longitude:{" "}
-                  <input
-                    type="text"
-                    value={post.location.longitude}
-                    onChange={(e) =>
-                      handleLocationChange(post.id, "longitude", e.target.value)
-                    }
-                  />
-                </span>
-              </div>
-            </div>
-            <div>
-              <strong>Description:</strong>
-              <textarea
-                value={post.description}
-                onChange={(e) =>
-                  handleInputChange(post.id, "description", e.target.value)
-                }
-              />
-            </div>
-            <div>
-              <strong>Display Picture:</strong>
-              {post.displayPicture ? (
-                <div className="preview-container">
-                  <img
-                    src={post.displayPicture}
-                    alt="Display"
-                    className="preview-image"
-                  />
-                  <div className="preview-actions">
-                    <button
-                      type="button"
-                      className="change-button"
-                      onClick={() =>
-                        document.getElementById(`display-picture-${post.id}`).click()
-                      }
-                    >
-                      Change
-                    </button>
-                  </div>
-                  <input
-                    type="file"
-                    id={`display-picture-${post.id}`}
-                    style={{ display: "none" }}
-                    accept="image/*"
-                    onChange={(e) =>
-                      handleDisplayPictureChange(post.id, e.target.files[0])
-                    }
-                  />
-                </div>
-              ) : (
-                <div
-                  className="upload-placeholder"
-                  onClick={() =>
-                    document.getElementById(`display-picture-${post.id}`).click()
-                  }
-                >
-                  Drop your image here or Browse
-                </div>
-              )}
-            </div>
-            <div>
-              <strong>Gallery:</strong>
-              <div
-                className="gallery-container"
-                onDragOver={(e) => e.preventDefault()}
-                onDrop={(e) => {
-                  e.preventDefault();
-                  handleGalleryChange(post.id, e.dataTransfer.files);
-                }}
-              >
-                {post.gallery.map((image, index) => (
-                  <div key={index} className="gallery-item">
-                    <img src={image} alt={`Gallery ${index}`} />
-                    <button
-                      className="remove-button"
-                      onClick={() => handleRemoveGalleryImage(post.id, index)}
-                    >
-                      Remove
-                    </button>
-                  </div>
-                ))}
-                <div
-                  className="gallery-upload-placeholder"
-                  onClick={() =>
-                    document.getElementById(`gallery-upload-${post.id}`).click()
-                  }
-                >
-                  <span className="plus-icon">+</span>
-                </div>
-                <input
-                  type="file"
-                  id={`gallery-upload-${post.id}`}
-                  style={{ display: "none" }}
-                  accept="image/*"
-                  multiple
-                  onChange={(e) =>
-                    handleGalleryChange(post.id, e.target.files)
-                  }
-                />
-              </div>
-            </div>
+      {postRequests.map((post) => (
+        <div
+          key={post.id}
+          className={expandedRow === post.id ? "row-details" : "post-row"}
+        >
+          <div className="row-header">
+            <span>{post.title}</span>
+            <span>{post.date}</span>
+            <span>{post.informality_layer.name}</span>
+            <span>{post.metadata.longitude}</span>
+            <span>{post.metadata.latitude}</span>
+            <button
+              className="review-button"
+              onClick={() => handleReview(post.id)}
+            >
+              Review
+            </button>
           </div>
-        ) : (
-          <div key={post.id} className="post-row">
-            <div className="row-header">
-              <span>{post.name}</span>
-              <span>{post.date}</span>
-              <span>{post.category}</span>
-              <span>{post.location.longitude}</span>
-              <span>{post.location.latitude}</span>
+          {expandedRow === post.id && (
+            <div className="details-section">
               <button
-                className="review-button"
+                className="collapse-button"
                 onClick={() => handleReview(post.id)}
               >
-                Review
+                Collapse
               </button>
+              <div>
+                <strong>Title:</strong>
+                <span>{post.title}</span>
+              </div>
+              <div>
+                <strong>Category:</strong>
+                <span>{post.category}</span>
+              </div>
+              <div className="location">
+                <strong>Location:</strong>
+                <span>Latitude: {post.metadata.latitude}</span>
+                <span>Longitude: {post.metadata.longitude}</span>
+              </div>
+              <div>
+                <strong>Description:</strong>
+                <p>{post.description}</p>
+              </div>
+              <div>
+                <strong>Display Picture:</strong>
+                {post.images.find(
+                  (image) => image.image_status === "display"
+                ) && (
+                  <div className="display-picture">
+                    <img
+                      src={
+                        post.images.find(
+                          (image) => image.image_status === "display"
+                        ).full_url
+                      }
+                      alt="Display"
+                    />
+                  </div>
+                )}
+              </div>
+              <div>
+                <strong>Gallery:</strong>
+                <div className="gallery-container">
+                  {post.images
+                    .filter((image) => image.image_status === "gallery")
+                    .map((image, index) => (
+                      <div key={image.id} className="gallery-item">
+                        <img src={image.full_url} alt={`Gallery ${index}`} />
+                      </div>
+                    ))}
+                </div>
+              </div>
+              <div className="action-buttons">
+                <button
+                  className="delete-button"
+                  onClick={() => handleDelete(post.id)}
+                >
+                  Delete
+                </button>
+                <button
+                  className="publish-button"
+                  onClick={() => handlePublish(post.id)}
+                >
+                  Publish
+                </button>
+              </div>
             </div>
-          </div>
-        )
-      )}
+          )}
+        </div>
+      ))}
     </div>
   );
 }

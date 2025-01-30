@@ -20,6 +20,7 @@ import routes from "./routes";
 import AboutUs from "./pages/AboutUs";
 import SmartBremenMap from "./Map";
 import AddNewLocation from "./backend/components/AddNewLocation";
+import EditLocation from "./backend/components/EditLocation";
 
 const App = () => {
   const navigate = useNavigate();
@@ -82,6 +83,8 @@ const AppWrapper = () => {
 
       {/* Dashboard route */}
       <Route path={routes.addNewLocation} element={<AddNewLocation />} />
+
+      <Route path={routes.editLocation} element={<EditLocation />} />
     </Routes>
   );
 };

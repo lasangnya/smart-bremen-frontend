@@ -5,8 +5,8 @@ import { useAuth } from "./AuthContext";
 import "./addnewlocation.css"; // Import the CSS file
 import routes from "../../routes";
 
-function AddNewLocation({ markerPosition }) {
-  const [title, setTitle] = useState("");
+function AddNewLocation({ markerPosition, post }) {
+  const [title, setTitle] = useState(post ? post.title : "");
   const [contactInfo, setContactInfo] = useState("");
   const [content, setContent] = useState("");
   const [citations, setCitations] = useState("");
@@ -57,16 +57,26 @@ function AddNewLocation({ markerPosition }) {
     if (displayPicture) formData.append("display_image", displayPicture);
     gallery.forEach((img, i) => formData.append("gallery_images[]", img));
     try {
-      const res = await axios.post(
-        "http://127.0.0.1:8082/api/posts",
-        formData,
-        {
+      let res;
+      if (post) {
+        res = await axios.PUT(
+          `http://127.0.0.1:8082/api/posts/${post.id}`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+      } else {
+        res = await axios.post("http://127.0.0.1:8082/api/posts", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${token}`,
           },
-        }
-      );
+        });
+      }
       console.log("Post created:", res.data);
       navigate(routes.home);
       // alert("Post created successfully!");

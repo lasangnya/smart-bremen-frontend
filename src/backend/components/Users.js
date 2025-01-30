@@ -1,10 +1,17 @@
-import React, { useState } from "react";
-import usersData from "../data/users.json";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./users.css";
 
 function Users() {
-  const [users, setUsers] = useState(usersData);
+  const [users, setUsers] = useState([]);
   const [expandedRow, setExpandedRow] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get("http://127.0.0.1:8082/api/users")
+      .then((response) => setUsers(response.data))
+      .catch((error) => console.error("Error fetching users:", error));
+  }, []);
 
   const handleReview = (id) => {
     setExpandedRow(expandedRow === id ? null : id);
@@ -13,9 +20,37 @@ function Users() {
   const handleInputChange = (id, field, value) => {
     setUsers((prevUsers) =>
       prevUsers.map((user) =>
-        user.id === id ? { ...user, [field]: value } : user
+        user.id === id
+          ? { ...user, [field]: field === "role_id" ? Number(value) : value }
+          : user
       )
     );
+  };
+
+  const handleSave = async (user) => {
+    try {
+      const updatedUser = { ...user, role_id: Number(user.role_id) }; // Ensure role_id is a number
+      await axios.put(
+        `http://127.0.0.1:8082/api/users/${user.id}`,
+        updatedUser
+      );
+      alert("User updated successfully!");
+    } catch (error) {
+      console.error("Error updating user:", error);
+      alert("Failed to update user.");
+    }
+  };
+  const handleDelete = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this user?")) return;
+
+    try {
+      await axios.delete(`http://127.0.0.1:8082/api/users/${id}`);
+      setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
+      alert("User deleted successfully!");
+    } catch (error) {
+      console.error("Error deleting user:", error);
+      alert("Failed to delete user.");
+    }
   };
 
   return (
@@ -27,17 +62,13 @@ function Users() {
               <div className="row-actions">
                 <button
                   className="remove-link"
-                  onClick={() => {
-                    const updatedUsers = users.filter((u) => u.id !== user.id);
-                    setUsers(updatedUsers);
-                    setExpandedRow(null);
-                  }}
+                  onClick={() => handleDelete(user.id)}
                 >
                   Remove
                 </button>
                 <button
                   className="save-button"
-                  onClick={() => console.log("Save clicked for", user.id)}
+                  onClick={() => handleSave(user)}
                 >
                   Save
                 </button>
@@ -45,29 +76,41 @@ function Users() {
               <div className="row-details">
                 <div className="row-detail-item">
                   <strong>Name:</strong>
-                  <span>{user.name}</span> 
+                  <input
+                    type="text"
+                    value={user.name}
+                    onChange={(e) =>
+                      handleInputChange(user.id, "name", e.target.value)
+                    }
+                  />
                 </div>
                 <div className="row-detail-item">
                   <strong>Email Address:</strong>
-                  <span>{user.email}</span>
+                  <input
+                    type="email"
+                    value={user.email}
+                    onChange={(e) =>
+                      handleInputChange(user.id, "email", e.target.value)
+                    }
+                  />
                 </div>
                 <div className="row-detail-item">
                   <strong>Role:</strong>
                   <select
-                    value={user.role}
+                    value={user.role_id}
                     onChange={(e) =>
-                      handleInputChange(user.id, "role", e.target.value)
+                      handleInputChange(user.id, "role_id", e.target.value)
                     }
                   >
-                    <option value="Maintainer">Maintainer</option>
-                    <option value="Admin">Admin</option>
+                    <option value="2">Artist</option>
+                    <option value="1">Admin</option>
                   </select>
                 </div>
                 <div className="row-detail-item">
                   <strong>Password:</strong>
                   <input
                     type="text"
-                    value={user.password}
+                    value={user.password || ""}
                     onChange={(e) =>
                       handleInputChange(user.id, "password", e.target.value)
                     }
