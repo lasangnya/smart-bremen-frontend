@@ -336,11 +336,19 @@ const SmartBremenMap = () => {
         }
       )
       .then(() => {
-        setPosts((prevPosts) =>
-          prevPosts.map((p) =>
-            p.id === post.id ? { ...p, published: p.published ? 0 : 1 } : p
-          )
-        );
+        axios
+          .get("http://127.0.0.1:8082/api/posts", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          })
+          .then((res) => {
+            setPosts(res.data || []);
+            // setPostPopup(null);
+          })
+          .catch((err) => {
+            console.error("Error fetching posts:", err);
+          });
       })
       .catch((err) => {
         console.error("Error toggling publish:", err);
@@ -353,8 +361,19 @@ const SmartBremenMap = () => {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then(() => {
-        console.log(post);
-        setPosts((prevPosts) => prevPosts.filter((p) => p.id !== post.id));
+        axios
+          .get("http://127.0.0.1:8082/api/posts", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          })
+          .then((res) => {
+            setPosts(res.data || []);
+            setPostPopup(null);
+          })
+          .catch((err) => {
+            console.error("Error fetching posts:", err);
+          });
       })
       .catch((error) => console.error("Error deleting post:", error));
   };

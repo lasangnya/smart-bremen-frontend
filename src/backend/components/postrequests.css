@@ -1,7 +1,7 @@
 .post-requests {
   padding: 20px;
   background-color: #fff;
-  font-family: 'CircularStd';
+  font-family: "CircularStd";
   width: 100%;
 }
 
@@ -30,7 +30,17 @@
   color: var(--primary);
   font-size: 14px;
   cursor: pointer;
-  font-family: 'CircularStd';
+  font-family: "CircularStd";
+}
+
+.collapse-button {
+  float: right;
+  background: none;
+  border: none;
+  color: var(--primary);
+  font-size: 14px;
+  cursor: pointer;
+  font-family: "CircularStd";
 }
 
 .row-details {
@@ -42,27 +52,27 @@
 }
 
 .row-details div {
-    margin-bottom: 20px; 
+  margin-bottom: 20px;
 }
 
 .row-details strong {
-    color: var(--primary);
-    margin-bottom: 10px; 
-    display: block; 
-  }
+  color: var(--primary);
+  margin-bottom: 10px;
+  display: block;
+}
 
-  .row-details textarea {
-    background-color: var(--accent); 
-    border-radius: 10px; 
-    padding: 10px; 
-    width: 80%; 
-    height: 150px; 
-    font-family: 'CircularStd'; 
-    font-size: 14px; 
-    color: var(--on-primary); 
-    resize: none; 
-    margin-top: 5px;
-  }
+.row-details textarea {
+  background-color: var(--accent);
+  border-radius: 10px;
+  padding: 10px;
+  width: 80%;
+  height: 150px;
+  font-family: "CircularStd";
+  font-size: 14px;
+  color: var(--on-primary);
+  resize: none;
+  margin-top: 5px;
+}
 
 .details-header {
   display: flex;
@@ -113,11 +123,33 @@
 }
 
 .location div {
-    display: flex;
-    gap: 20px; 
-  }
-  
-  .location span {
-    display: flex; 
-    flex-direction: row;
-  }
+  display: flex;
+  gap: 20px;
+}
+
+.location span {
+  display: flex;
+  flex-direction: row;
+}
+
+.delete-button {
+  padding: 10px 20px;
+  background-color: #a81638;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  border: none;
+}
+
+.publish-button {
+  padding: 10px 20px;
+  background-color: var(--primary);
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  border: none;
+}

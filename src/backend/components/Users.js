@@ -34,7 +34,7 @@ function Users() {
         `http://127.0.0.1:8082/api/users/${user.id}`,
         updatedUser
       );
-      alert("User updated successfully!");
+      // alert("User updated successfully!");
     } catch (error) {
       console.error("Error updating user:", error);
       alert("Failed to update user.");
@@ -46,7 +46,7 @@ function Users() {
     try {
       await axios.delete(`http://127.0.0.1:8082/api/users/${id}`);
       setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
-      alert("User deleted successfully!");
+      // alert("User deleted successfully!");
     } catch (error) {
       console.error("Error deleting user:", error);
       alert("Failed to delete user.");
@@ -106,7 +106,7 @@ function Users() {
                     <option value="1">Admin</option>
                   </select>
                 </div>
-                <div className="row-detail-item">
+                {/* <div className="row-detail-item">
                   <strong>Password:</strong>
                   <input
                     type="text"
@@ -115,7 +115,7 @@ function Users() {
                       handleInputChange(user.id, "password", e.target.value)
                     }
                   />
-                </div>
+                </div> */}
               </div>
             </div>
           ) : (

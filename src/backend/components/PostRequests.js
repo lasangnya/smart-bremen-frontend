@@ -64,21 +64,23 @@ function PostRequests() {
           key={post.id}
           className={expandedRow === post.id ? "row-details" : "post-row"}
         >
-          <div className="row-header">
-            <span>{post.title}</span>
-            <span>{post.date}</span>
-            <span>{post.informality_layer.name}</span>
-            <span>{post.metadata.longitude}</span>
-            <span>{post.metadata.latitude}</span>
-            <button
-              className="review-button"
-              onClick={() => handleReview(post.id)}
-            >
-              Review
-            </button>
-          </div>
+          {expandedRow !== post.id && (
+            <div className="row-header">
+              <span>{post.title}</span>
+              {/* <span>{post.date}</span> */}
+              <span>{post.informality_layer.name}</span>
+              {/* <span>{post.metadata.longitude}</span>
+            <span>{post.metadata.latitude}</span> */}
+              <button
+                className="review-button"
+                onClick={() => handleReview(post.id)}
+              >
+                Review
+              </button>
+            </div>
+          )}
           {expandedRow === post.id && (
-            <div className="details-section">
+            <div>
               <button
                 className="collapse-button"
                 onClick={() => handleReview(post.id)}
@@ -91,7 +93,7 @@ function PostRequests() {
               </div>
               <div>
                 <strong>Category:</strong>
-                <span>{post.category}</span>
+                <span>{post.informality_layer.name}</span>
               </div>
               <div className="location">
                 <strong>Location:</strong>
@@ -100,7 +102,11 @@ function PostRequests() {
               </div>
               <div>
                 <strong>Description:</strong>
-                <p>{post.description}</p>
+                <p>{post.content}</p>
+              </div>
+              <div>
+                <strong>Citations:</strong>
+                <p>{post.citations}</p>
               </div>
               <div>
                 <strong>Display Picture:</strong>
@@ -133,7 +139,7 @@ function PostRequests() {
               </div>
               <div className="action-buttons">
                 <button
-                  className="delete-button"
+                  className="delete-button mr-2"
                   onClick={() => handleDelete(post.id)}
                 >
                   Delete
