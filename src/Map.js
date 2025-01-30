@@ -263,27 +263,6 @@
 //         </div>
 //       )}
 
-//       {/* Leaflet Map */}
-//       <MapContainer
-//         center={[53.0765, 8.80681]}
-//         zoom={14}
-//         style={{ height: "100%", width: "100%" }}
-//       >
-//         {/* <TileLayer url="http://localhost:8080/styles/openmaptiles/{z}/{x}/{y}.png" /> */}
-//         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-//         //{" "}
-//         {/* <TileLayer url="http://localhost:8080/styles/OSM OpenMapTiles/512/{z}/{x}/{y}.png" /> */}
-//         // {/* http://localhost:8080/styles/512/Smartcity.json */}
-//         //{" "}
-//         {/* <TileLayer url="http://localhost:8080/styles/smartcity/512/{z}/{x}/{y}.png" /> */}
-//         <MaskLayer
-//           geojsonUrl="/data/bremen.geojson"
-//           onMarkerClick={handleMarkerClick}
-//         />
-//       </MapContainer>
-//     </div>
-//   );
-// };
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 
@@ -336,19 +315,11 @@ const SmartBremenMap = () => {
         }
       )
       .then(() => {
-        axios
-          .get("http://127.0.0.1:8082/api/posts", {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          })
-          .then((res) => {
-            setPosts(res.data || []);
-            // setPostPopup(null);
-          })
-          .catch((err) => {
-            console.error("Error fetching posts:", err);
-          });
+        setPosts((prevPosts) =>
+          prevPosts.map((p) =>
+            p.id === post.id ? { ...p, published: p.published ? 0 : 1 } : p
+          )
+        );
       })
       .catch((err) => {
         console.error("Error toggling publish:", err);
@@ -361,19 +332,8 @@ const SmartBremenMap = () => {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then(() => {
-        axios
-          .get("http://127.0.0.1:8082/api/posts", {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          })
-          .then((res) => {
-            setPosts(res.data || []);
-            setPostPopup(null);
-          })
-          .catch((err) => {
-            console.error("Error fetching posts:", err);
-          });
+        console.log(post);
+        setPosts((prevPosts) => prevPosts.filter((p) => p.id !== post.id));
       })
       .catch((error) => console.error("Error deleting post:", error));
   };
@@ -416,17 +376,19 @@ const SmartBremenMap = () => {
         }
         alt={post.title}
       />
-      <div>{post.content}</div>
-      <button onClick={closePopup}>Close</button>
-      <button
-        onClick={() => navigate(routes.editLocation, { state: { post } })}
-      >
-        Edit
-      </button>
-      <button onClick={() => togglePublish(post)}>
-        {post.published === 1 ? "Unpublish" : "Publish"}
-      </button>
-      <button onClick={() => deletePost(post)}>Delete</button>
+      <div className="popup-body">{post.content}</div>
+      <div className="popup-buttons-container">
+        <button className="popup-close-button" onClick={closePopup}>Close</button>
+        <button className="popup-edit-button"
+          onClick={() => navigate(routes.editLocation, { state: { post } })}
+        >
+          Edit
+        </button>
+        <button className="popup-publish-button" onClick={() => togglePublish(post)}>
+          {post.published === 1 ? "Unpublish" : "Publish"}
+        </button>
+        <button className="popup-delete-button" onClick={() => deletePost(post)}>Delete</button>
+      </div>
     </div>
   );
 
