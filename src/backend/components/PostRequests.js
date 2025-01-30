@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import postRequestsData from "../data/postRequests.json";
 import "./postrequests.css";
 import { useAuth } from "./AuthContext";
 
 function PostRequests() {
-  const [postRequests, setPostRequests] = useState(postRequestsData);
+  const [postRequests, setPostRequests] = useState([]);
   const [expandedRow, setExpandedRow] = useState(null);
   const { token } = useAuth();
 

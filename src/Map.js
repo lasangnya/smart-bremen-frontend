@@ -298,13 +298,13 @@ import { useNavigate } from "react-router";
 import routes from "./routes";
 
 const SmartBremenMap = () => {
-  const [posts, setPosts] = useState("");
+  const [posts, setPosts] = useState([]);
   const { token, user } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8082/api/dashboard/posts", {
+      .get("http://127.0.0.1:8082/api/posts", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -315,11 +315,10 @@ const SmartBremenMap = () => {
       .catch((err) => {
         console.error("Error fetching posts:", err);
       });
-  }, []);
+  }, [token]);
 
   const handleMarkerClick = (post) => {
     console.log(post.published);
-    console.log("Marker clicked:", post.title); // Debug: Log the clicked marker's data
     setPostPopup(post);
     setPopupData({
       visible: false,
@@ -327,7 +326,7 @@ const SmartBremenMap = () => {
     setMarkerPosition(null);
   };
 
-  const publish = (post) => {
+  const togglePublish = (post) => {
     axios
       .post(
         `http://127.0.0.1:8082/api/admin/posts/${post.id}/toggle-publish`,
@@ -336,45 +335,52 @@ const SmartBremenMap = () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       )
-      .then((res) => {
-        // setPosts(res.data || []);
+      .then(() => {
+        setPosts((prevPosts) =>
+          prevPosts.map((p) =>
+            p.id === post.id ? { ...p, published: p.published ? 0 : 1 } : p
+          )
+        );
       })
       .catch((err) => {
-        console.error("Error fetching posts:", err);
+        console.error("Error toggling publish:", err);
       });
   };
+
+  const deletePost = (post) => {
+    axios
+      .delete(`http://127.0.0.1:8082/api/posts/${post.id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then(() => {
+        console.log(post);
+        setPosts((prevPosts) => prevPosts.filter((p) => p.id !== post.id));
+      })
+      .catch((error) => console.error("Error deleting post:", error));
+  };
+
   const icon = L.icon({
     iconUrl: iconSVG,
     iconSize: [38, 95],
     iconAnchor: [19, 78],
-    // popupAnchor: [-3, -76],
-    // shadowUrl: "shadow.png",
-    // shadowSize: [68, 95],
-    // shadowAnchor: [22, 94],
   });
 
   const [markerPosition, setMarkerPosition] = useState(null);
-
   const [popupData, setPopupData] = useState({
     visible: false,
     position: { lat: null, lng: null },
   });
 
-  const [postPopup, setPostPopup] = useState({
-    visible: false,
-  });
+  const [postPopup, setPostPopup] = useState(null);
 
   const handleMapClick = (e) => {
     if (token) {
       const { lat, lng } = e.latlng;
-
       setMarkerPosition([lat, lng]);
-
       setPopupData({
         visible: true,
         position: { lat, lng },
       });
-
       setPostPopup(null);
     }
   };
@@ -382,104 +388,49 @@ const SmartBremenMap = () => {
   const CustomPopup = ({ post, closePopup }) => (
     <div className="post-container">
       <div className="popup-header">
-        <h3 style={{ fontSize: "16px", margin: "5px 0" }}>{post.title}</h3>
+        <h3>{post.title}</h3>
       </div>
-
-      {/* img needs to be full size in width. all images are square, maybe that helps */}
       <img
         src={
           post.images?.find((image) => image.image_status === "display")
             ?.full_url
         }
-      ></img>
-      <div
-        style={{
-          height: "30%", //?? needs to be dynamic i guess
-          "overflow-y": " auto",
-          padding: "10px",
-          "font-size": "16px",
-          "line-height": "1.5",
-          " white-space": "pre-wrap" /* Keeps text formatting */,
-        }}
-      >
-        {post.content}
-      </div>
-
+        alt={post.title}
+      />
+      <div>{post.content}</div>
+      <button onClick={closePopup}>Close</button>
       <button
-        onClick={closePopup}
-        style={{
-          background: "#4838cc",
-          color: "white",
-          border: "none",
-          padding: "5px 10px",
-          borderRadius: "5px",
-          cursor: "pointer",
-        }}
-      >
-        Close
-      </button>
-      <button
-        onClick={() =>
-          navigate(routes.editLocation, {
-            state: {
-              post: post,
-            },
-          })
-        }
-        style={{
-          background: "#4838cc",
-          color: "white",
-          border: "none",
-          padding: "5px 10px",
-          borderRadius: "5px",
-          cursor: "pointer",
-        }}
+        onClick={() => navigate(routes.editLocation, { state: { post } })}
       >
         Edit
       </button>
-      <button
-        onClick={() => publish(post)}
-        style={{
-          background: "#4838cc",
-          color: "white",
-          border: "none",
-          padding: "5px 10px",
-          borderRadius: "5px",
-          cursor: "pointer",
-        }}
-      >
+      <button onClick={() => togglePublish(post)}>
         {post.published === 1 ? "Unpublish" : "Publish"}
       </button>
+      <button onClick={() => deletePost(post)}>Delete</button>
     </div>
-    // </div>
   );
 
   const AddNewLocationPopup = () =>
     popupData.visible && (
       <div className="popup-container">
-        <div className="popup-header">
-          <h3>Create a new post at this location</h3>
-        </div>
-        <div className="popup-button-container">
-          <button
-            className="submit-button"
-            onClick={() =>
-              navigate(routes.dashboard, {
-                state: {
-                  markerPosition: markerPosition,
-                },
-              })
-            }
-          >
-            Create
-          </button>
-          <button
-            className="cancel-button"
-            onClick={() => setPopupData({ visible: false, position: {} })}
-          >
-            Close
-          </button>
-        </div>
+        <h3>Create a new post at this location</h3>
+        <button
+          className="submit-button"
+          onClick={() =>
+            navigate(routes.dashboard, {
+              state: { markerPosition: markerPosition },
+            })
+          }
+        >
+          Create
+        </button>
+        <button
+          className="cancel-button"
+          onClick={() => setPopupData({ visible: false, position: {} })}
+        >
+          Close
+        </button>
       </div>
     );
 
@@ -488,9 +439,9 @@ const SmartBremenMap = () => {
 
     useEffect(() => {
       map.on("click", handleMapClick);
-
       return () => map.off("click", handleMapClick);
     }, [map]);
+
     return null;
   };
 
@@ -504,14 +455,9 @@ const SmartBremenMap = () => {
         center={[53.0765, 8.80681]}
         zoom={14}
         style={{ height: "100%", width: "100%" }}
-        onMarkerClick
       >
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-
-        {markerPosition && (
-          <Marker position={markerPosition} icon={icon}></Marker>
-        )}
-
+        {markerPosition && <Marker position={markerPosition} icon={icon} />}
         {posts?.data?.map((post) => {
           const latitude = post?.images?.[0]?.metadata?.latitude;
           const longitude = post?.images?.[0]?.metadata?.longitude;
@@ -519,19 +465,18 @@ const SmartBremenMap = () => {
           if (latitude && longitude) {
             return (
               <Marker
-                icon={icon}
                 key={post.id}
                 position={[latitude, longitude]}
+                icon={icon}
                 eventHandlers={{
                   click: () => handleMarkerClick(post),
                 }}
-              ></Marker>
+              />
             );
           }
 
-          return null; // Skip entries with invalid lat/lng
+          return null;
         })}
-
         <MapEvents />
       </MapContainer>
     </div>

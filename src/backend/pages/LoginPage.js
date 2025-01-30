@@ -73,7 +73,7 @@ function LoginPage({ onLogin }) {
               Login
             </button>
             <a href="/signup" className="signup-link">
-              Don’t have an account? Create one here
+              Don't have an account? Create one here
             </a>
           </form>
         </div>
